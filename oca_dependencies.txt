@@ -1,0 +1,1 @@
+adhoc_stock https://github.com/ingadhoc/stock.git
