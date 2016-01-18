@@ -1,1 +1,2 @@
+aeroo_reports https://github.com/aeroo/aeroo_reports.git
 adhoc_stock https://github.com/ingadhoc/stock.git
