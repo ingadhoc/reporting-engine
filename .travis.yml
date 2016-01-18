@@ -21,6 +21,7 @@ addons:
       - python-simplejson
       - python-serial
       - python-yaml
+      - libcups2-dev # for aeroo
 #     Search your packages here:
 #       https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
 #      - wkhtmltopdf  # only add if needed and check the before_install section below
