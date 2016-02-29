@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator - Account Voucher',
-    'version': '8.0.2.2.0',
+    'version': '8.0.2.3.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -35,7 +35,10 @@ Report Configurator - Account Voucher
     ],
     'depends': [
         'report_extended',
-        'account_voucher',
+        # 'account_voucher',
+        # TODO deberiamos mover receiptbook a otro modulo para que este no
+        # dependa de l10n_ar_account_voucher
+        'l10n_ar_account_voucher',
     ],
     'data': [
         'views/report_view.xml',

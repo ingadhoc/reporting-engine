@@ -10,7 +10,7 @@
                     <page string="Account Voucher Information" attrs="{'invisible':[('model','!=', 'account.voucher')]}">
                         <group>
                             <field name="voucher_type"/>
-                            <field name="journal_ids"/>
+                            <field name="receiptbook_ids"/>
                         </group>
                     </page>
                 </notebook>
