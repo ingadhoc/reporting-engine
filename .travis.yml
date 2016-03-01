@@ -64,9 +64,6 @@ virtualenv:
   system_site_packages: true
 
 install:
-  # aeroo reports, because aeroo repository dont have a requirements file
-  - pip install git+https://github.com/aeroo/aeroolib.git@master pycups==1.9.68
-
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
