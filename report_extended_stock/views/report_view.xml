@@ -10,6 +10,7 @@
                     <page string="Picking Information" attrs="{'invisible':[('model','!=', 'stock.picking')]}">
                         <group>
                             <field name="stock_report_type"/>
+                            <field name="stock_picking_book_ids"/>
                             <field name="stock_picking_type_ids"/>
                         </group>
                     </page>
