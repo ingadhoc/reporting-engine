@@ -9,6 +9,10 @@ from openerp import models, fields
 class ir_actions_report(models.Model):
     _inherit = 'ir.actions.report.xml'
 
+    stock_picking_book_ids = fields.Many2many(
+        'stock.book',
+        'report_configuration_stock_book_rel',
+        'report_configuration_id', 'book_id', 'Picking Books')
     stock_picking_type_ids = fields.Many2many(
         'stock.picking.type',
         'report_configuration_stock_picking_type_rel',
@@ -26,14 +30,24 @@ class ir_actions_report(models.Model):
                 # Search for especific picking type and report type
                 domains.append([
                     ('stock_picking_type_ids', '=', record.picking_type_id.id),
+                    ('stock_picking_book_ids', '=', record.book_id.id),
                     ('stock_report_type', '=', stock_report_type),
                     ])
                 # Search for especific report type
                 domains.append([
                     ('stock_report_type', '=', stock_report_type),
+                    ('stock_picking_book_ids', '=', record.book_id.id),
                     ])
+                domains.append([
+                    ('stock_report_type', '=', stock_report_type),
+                    ('stock_picking_type_ids', '=', record.picking_type_id.id),
+                    ])
+            # Search for especific boook and report type
+            domains.append([('stock_picking_book_ids', '=', record.book_id.id)])
             # Search for especific picking type and report type
             domains.append([('stock_picking_type_ids', '=', record.picking_type_id.id)])
+            # Search without book
+            domains.append([('stock_picking_book_ids', '=', False)])
             # Search without picking_type
             domains.append([('stock_picking_type_ids', '=', False)])
             # Search without picking_type
