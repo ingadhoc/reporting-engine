@@ -27,7 +27,7 @@
     'description': """
 Report Configurator
 ===================
-This module allows users to define reports of Aeroo for different
+This module allows users to define reports for different
 objects such as invoice or sale order.
 It creates the menu to the configuration objects in:
     Configuration / Personalization / Aeroo Reports / Report Configuration
