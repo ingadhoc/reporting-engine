@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator - Sale',
-    'version': '8.0.1.1.1',
+    'version': '8.0.1.3.1',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -28,7 +28,7 @@
 Report Configurator - Sale
 =============================
     """,
-    'author':  'ADHOC SA',
+    'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
     'images': [
@@ -39,7 +39,8 @@ Report Configurator - Sale
     ],
     'data': [
         'views/report_view.xml',
-        'views/sale_order_view.xml'
+        'views/sale_order_view.xml',
+        'views/company_view.xml'
     ],
     'demo': [
     ],

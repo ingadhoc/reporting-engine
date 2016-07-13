@@ -38,10 +38,11 @@ class stock_picking(models.Model):
     def _get_invoice_vals(self, key, inv_type, journal_id, move):
         vals = super(stock_picking, self)._get_invoice_vals(
             key, inv_type, journal_id, move)
-        if 'comment' in vals:
+        if self.env.user.company_id.internal_notes:
+            vals.update({
+                'internal_notes': move.picking_id.note})
+        if 'comment' in vals and not self.env.user.company_id.external_notes:
             vals.pop('comment')
-        vals.update({
-            'internal_notes': move.picking_id.note})
         return vals
 
 
@@ -51,6 +52,10 @@ class stock_move(models.Model):
     @api.model
     def _prepare_picking_assign(self, move):
         res = super(stock_move, self)._prepare_picking_assign(move)
-        res.update({
-            'note': move.procurement_id.sale_line_id.order_id.internal_notes})
+        if self.env.user.company_id.internal_notes:
+            res.update({
+                'note': move.procurement_id.sale_line_id.order_id.internal_notes})
+        if self.env.user.company_id.external_notes:
+            res.update({
+                'observations': move.procurement_id.sale_line_id.order_id.note})
         return res

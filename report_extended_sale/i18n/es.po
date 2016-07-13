@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 12:25+0000\n"
-"PO-Revision-Date: 2015-10-21 09:27-0300\n"
+"POT-Creation-Date: 2016-07-13 16:58+0000\n"
+"PO-Revision-Date: 2016-07-13 13:59-0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "X-Generator: Poedit 1.5.4\n"
+
+#. module: report_extended_sale
+#: model:ir.model,name:report_extended_sale.model_res_company
+msgid "Companies"
+msgstr "Compañías"
 
 #. module: report_extended_sale
 #: selection:ir.actions.report.xml,sale_order_state:0
@@ -37,6 +42,16 @@ msgid "Invoice"
 msgstr "Factura"
 
 #. module: report_extended_sale
+#: field:res.company,external_notes:0
+msgid "Move External Notes"
+msgstr "Trasladar Notas Externas"
+
+#. module: report_extended_sale
+#: field:res.company,internal_notes:0
+msgid "Move Internal Notes"
+msgstr "Trasladar Notas Internas"
+
+#. module: report_extended_sale
 #: selection:ir.actions.report.xml,sale_order_state:0
 msgid "Quotation"
 msgstr "Quotation"
@@ -54,4 +69,4 @@ msgstr "Sale Order State"
 #. module: report_extended_sale
 #: model:ir.model,name:report_extended_sale.model_sale_order
 msgid "Sales Order"
-msgstr "Orden de Ventas"
+msgstr "Pedido de venta"
