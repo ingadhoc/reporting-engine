@@ -30,8 +30,9 @@ class sale_order(models.Model):
     @api.model
     def _prepare_invoice(self, order, lines):
         vals = super(sale_order, self)._prepare_invoice(order, lines)
-        if 'comment' in vals:
+        if self.env.user.company_id.internal_notes:
+            vals.update({
+                'internal_notes': order.internal_notes})
+        if 'comment' in vals and not self.env.user.company_id.external_notes:
             vals.pop('comment')
-        vals.update({
-            'internal_notes': order.internal_notes})
         return vals
