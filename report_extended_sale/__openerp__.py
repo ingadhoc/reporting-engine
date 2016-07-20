@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator - Sale',
-    'version': '8.0.1.3.1',
+    'version': '8.0.1.3.2',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',

@@ -9,5 +9,12 @@ from openerp import models, fields
 class res_company(models.Model):
     _inherit = 'res.company'
 
-    internal_notes = fields.Boolean('Move Internal Notes')
-    external_notes = fields.Boolean('Move External Notes')
+    # TODO this parameters should be global and not per company
+    internal_notes = fields.Boolean(
+        'Move Internal Notes',
+        default=True
+    )
+    external_notes = fields.Boolean(
+        'Move External Notes',
+        default=True
+    )

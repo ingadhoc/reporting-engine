@@ -49,4 +49,5 @@ class ir_actions_report(models.Model):
             # Search without journal and without state
             domains.append(
                 [('account_invoice_state', '=', False), ('account_invoice_journal_ids', '=', False)])
+            print 'domains', domains
         return domains
