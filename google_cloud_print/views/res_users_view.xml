@@ -9,13 +9,19 @@
                 <notebook colspan="4" position="inside">
                     <page string="Google Cloud Printers">
                         <group>
-                            <field name="google_user"/>
-                            <field name="google_password"/>
+                            <label for="google_cloudprint_authorization_code"/>
+                            <div class="oe_inline">
+                                <field name="google_cloudprint_authorization_code" class="oe_inline"/>
+                                <field name="google_cloudprint_uri" widget="url" text="(Generate Google Authorization Code)" class="oe_inline oe_bold"/>
+                            </div>
+                            <field name="google_cloudprint_rtoken"/>
                         </group>
+                        <button name="update_user_gc_printers" type="object" string="Refresh Printers" class="oe_link" attrs="{'invisible': [('google_cloudprint_rtoken', '=', False)]}"/>
+                        <button name="update_user_gc_printers_status" type="object" string="Refresh Printers Status" class="oe_link" attrs="{'invisible': [('google_cloudprint_rtoken', '=', False)]}"/>
+                        <field name="gcprinter_ids"/>
                     </page>
                 </notebook>
             </field>
         </record>
     </data>
 </openerp>
-

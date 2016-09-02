@@ -25,23 +25,12 @@ class PrintingPrinterUpdateWizard(models.TransientModel):
         self.ensure_one()
         if self.printer_type == 'cups':
             return super(PrintingPrinterUpdateWizard, self).action_ok()
-        _logger.info('Updating Google Cloud Printers')
-        gcprinters = self.env['google.cloudprint.config'].get_printers()
-        for gcprinter in gcprinters:
-            printer = self.env['printing.printer'].search(
-                [('system_name', '=', gcprinter.get('name'))], limit=1)
-            # TODO remove local printers not any more on google
-            if not printer and gcprinter.get('id') != '__google__docs':
-                printer.create({
-                    'name': gcprinter['displayName'],
-                    'system_name': gcprinter['name'],
-                    'model': gcprinter.get('type', False),
-                    'location': gcprinter.get('proxy', False),
-                    'uri': gcprinter.get('id', False),
-                    'printer_type': 'gcp',
-                    'status': 'unknown',
-                    'status_message': gcprinter.get('connectionStatus', False),
-                })
+        # update generic printers
+        self.env['printing.printer'].update_gc_printers()
+        # update users printers
+        self.env['res.users'].search([
+            ('google_cloudprint_rtoken', '!=', False)
+        ]).update_user_gc_printers()
         return {
             'name': 'Printers',
             'view_type': 'form',

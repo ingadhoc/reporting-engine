@@ -30,29 +30,37 @@ class GoogleCloudprintConfig(models.Model):
     _name = 'google.cloudprint.config'
 
     @api.model
-    def get_access_token(self, scope=None):
+    def get_access_token(self, scope=None, user=None):
+        """
+        Return an access_token for user or use credentials stored on parameter
+        """
         Config = self.env['ir.config_parameter']
-        google_cloudprint_refresh_token = Config.sudo().get_param(
-            'google_cloudprint_refresh_token')
-        user_is_admin = self.env.user.id == SUPERUSER_ID
-        if not google_cloudprint_refresh_token:
-            if user_is_admin:
-                dummy, action_id = self.env[
-                    'ir.model.data'].get_object_reference(
-                    'base_setup', 'action_general_configuration')
-                msg = _(
-                    "You haven't configured 'Authorization Code' generated "
-                    "from google, Please generate and configure it .")
-                raise RedirectWarning(
-                    msg, action_id, _('Go to the configuration panel'))
-            else:
-                raise Warning(_(
-                    "Google Drive is not yet configured. "
-                    "Please contact your administrator."))
+        if not user:
+            google_cloudprint_refresh_token = Config.sudo().get_param(
+                'google_cloudprint_refresh_token')
+            user_is_admin = self.env.user.id == SUPERUSER_ID
+            if not google_cloudprint_refresh_token:
+                if user_is_admin:
+                    dummy, action_id = self.env[
+                        'ir.model.data'].get_object_reference(
+                        'base_setup', 'action_general_configuration')
+                    msg = _(
+                        "You haven't configured 'Authorization Code' generated"
+                        " from google, Please generate and configure it .")
+                    raise RedirectWarning(
+                        msg, action_id, _('Go to the configuration panel'))
+                else:
+                    raise Warning(_(
+                        "Google Drive is not yet configured. "
+                        "Please contact your administrator."))
+        else:
+            google_cloudprint_refresh_token = user.google_cloudprint_rtoken
+
         google_cloudprint_client_id = Config.sudo().get_param(
             'google_cloudprint_client_id')
         google_cloudprint_client_secret = Config.sudo().get_param(
             'google_cloudprint_client_secret')
+
         # For Getting New Access Token With help of old Refresh Token
         data = werkzeug.url_encode({
             'client_id': google_cloudprint_client_id,
@@ -83,8 +91,8 @@ class GoogleCloudprintConfig(models.Model):
         return content.get('access_token')
 
     @api.model
-    def get_response(self, interface, params=None, data=None):
-        access_token = self.get_access_token()
+    def get_response(self, interface, params=None, data=None, user=None):
+        access_token = self.get_access_token(user=user)
         request_url = "%s/%s" % (CLOUDPRINT_URL, interface)
         if params:
             request_url += "?%s" % (
@@ -93,7 +101,7 @@ class GoogleCloudprintConfig(models.Model):
             "Authorization": 'Bearer ' + access_token,
         }
         data_json = json.dumps(data)
-        _logger.info('Running GCP request with url %s' % request_url)
+        # _logger.info('Running GCP request with url %s' % request_url)
         try:
             req = urllib2.Request(request_url, data_json, headers)
             response = urllib2.urlopen(req, timeout=TIMEOUT).read()
@@ -101,16 +109,16 @@ class GoogleCloudprintConfig(models.Model):
             raise Warning(_(
                 "Could not connect to google cloud print. "
                 "Check your configuration"))
-        _logger.info('Google Cloud Print response for %s\n%s' % (
-            interface, response))
+        # _logger.info('Google Cloud Print response for %s\n%s' % (
+        #     interface, response))
         return json.loads(response)
 
     @api.model
-    def get_printers(self):
+    def get_printers(self, user=None):
         """
         Return a dictionary with gc printers
         """
-        return self.get_response('search').get('printers')
+        return self.get_response('search', user=user).get('printers')
 
     # este metodo es parcialmente una copia de
     # https://developers.google.com/cloud-print/docs/pythonCode
@@ -129,7 +137,8 @@ class GoogleCloudprintConfig(models.Model):
         """
 
         # TODO implementar options
-
+        if jobtype in ['qweb-pdf', 'pdf', 'aeroo']:
+            jobtype = 'pdf'
         if jobtype == 'pdf':
             b64file = self.Base64Encode(jobsrc)
             fdata = self.ReadFile(b64file)
