@@ -21,6 +21,7 @@ addons:
       - python-simplejson
       - python-serial
       - python-yaml
+      - cups # for google clour print
       - libcups2-dev # for google clour print
       # FE
       - python-dev
