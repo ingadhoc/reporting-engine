@@ -5,7 +5,6 @@
 ##############################################################################
 from openerp import models, api, fields
 # from openerp.exceptions import Warning
-from openerp.addons.google_cloud_print.google_cloud_print import *
 import logging
 _logger = logging.getLogger(__name__)
 
