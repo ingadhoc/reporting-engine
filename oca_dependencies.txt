@@ -1,3 +1,5 @@
+oca-web https://github.com/oca/web.git
+oca-report-print-send https://github.com/oca/report-print-send.git
 adhoc-aeroo_reports https://github.com/ingadhoc/aeroo_reports.git
 adhoc-stock https://github.com/ingadhoc/stock.git
 adhoc-argentina https://github.com/ingadhoc/odoo-argentina.git
