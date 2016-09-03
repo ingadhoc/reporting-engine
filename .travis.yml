@@ -21,6 +21,7 @@ addons:
       - python-simplejson
       - python-serial
       - python-yaml
+      - libcups2-dev # for google clour print
       # FE
       - python-dev
       - swig
