@@ -6,7 +6,7 @@
             <field name="model">base.config.settings</field>
             <field name="inherit_id" ref="base_setup.view_general_configuration" />
             <field name="arch" type="xml">
-                <xpath expr="//div[@name='module_google_drive']" position="after">
+                <xpath expr="//div[@name='google_drive']" position="after">
                     <label for="id" string="Google Cloud Print"/>
                     <div name="google_cloudprint">
                         <div class="oe_inline">

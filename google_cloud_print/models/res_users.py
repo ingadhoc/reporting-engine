@@ -25,7 +25,7 @@ class ResUsers(models.Model):
     gcprinter_ids = fields.One2many(
         'printing.printer',
         'gc_user_id',
-        'Google Cloud Printers',
+        'My Google Cloud Printers',
     )
 
     def get_google_cloudprint_scope(self):
@@ -61,6 +61,7 @@ class ResUsers(models.Model):
             if user.google_cloudprint_rtoken:
                 self.env['printing.printer'].update_gc_printers(
                     user=user)
+        return {'type': 'ir.actions.act_window.none'}
 
     @api.multi
     def update_user_gc_printers_status(self):
@@ -68,3 +69,4 @@ class ResUsers(models.Model):
             if user.google_cloudprint_rtoken:
                 self.env['printing.printer'].update_gc_printers_status(
                     user=user)
+        return {'type': 'ir.actions.act_window.none'}
