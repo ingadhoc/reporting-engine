@@ -35,6 +35,7 @@
         'res_config_view.xml',
         'gcp_data.xml',
         'wizard/update_printers.xml',
+        'security/ir.model.access.csv',
     ],
     "demo": [],
     "installable": True,

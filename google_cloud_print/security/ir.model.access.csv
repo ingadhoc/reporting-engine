@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_google_cloudprint_config_all,access_google_cloudprint_config_all,model_google_cloudprint_config,,1,0,0,0
