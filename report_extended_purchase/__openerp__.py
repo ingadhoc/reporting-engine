@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator - Purchase',
-    'version': '8.0.1.2.0',
+    'version': '9.0.1.0.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -28,7 +28,7 @@
 Report Configurator - Purchase
 ==============================
     """,
-    'author':  'ADHOC SA',
+    'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
     'images': [
@@ -45,8 +45,7 @@ Report Configurator - Purchase
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
     'application': False,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

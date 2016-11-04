@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator',
-    'version': '8.0.1.0.0',
+    'version': '9.0.1.0.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -49,7 +49,7 @@ The parser proved a serie of fields an functions to use in the odt:
     o net_price: Takes a gross quantity and a discount and return the gross
       applying the discount.
     """,
-    'author':  'ADHOC SA',
+    'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
     'images': [
@@ -61,14 +61,15 @@ The parser proved a serie of fields an functions to use in the odt:
         'views/company_view.xml',
         'views/report_view.xml',
         'security/security.xml',
-        'security/ir.model.access.csv', #TODO borrar este parche de reglas, es por un error que me estaba dando al querer imprimir ocn users distintos de admin
+        # TODO borrar este parche de reglas, es por un error que me estaba
+        # dando al querer imprimir ocn users distintos de admin
+        'security/ir.model.access.csv',
     ],
     'demo': [
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
     'application': False,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

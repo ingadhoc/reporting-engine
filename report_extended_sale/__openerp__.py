@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator - Sale',
-    'version': '8.0.1.3.2',
+    'version': '9.0.1.0.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -46,8 +46,7 @@ Report Configurator - Sale
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
     'application': False,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
