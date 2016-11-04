@@ -38,6 +38,6 @@
         'security/ir.model.access.csv',
     ],
     "demo": [],
-    "installable": True,
+    "installable": False,
     "version": '9.0.1.0.0',
 }
