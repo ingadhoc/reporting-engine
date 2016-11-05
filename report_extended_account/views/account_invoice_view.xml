@@ -10,9 +10,7 @@
                     <field name="splitted_invoice_id" attrs="{'invisible':[('splitted_invoice_id','=',False)]}"/>
                 </field>
                 <field name="comment" position="before">
-                    <!-- <label for="internal_notes"/> -->
                     <field name="internal_notes" placeholder="Internal notes.."/>
-                    <!-- <field name="internal_notes" class="oe_inline"/> -->
                 </field>
             </field>
         </record>

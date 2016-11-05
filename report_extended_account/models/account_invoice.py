@@ -94,13 +94,13 @@ class account_invoice(models.Model):
         # return res
 
     # This is the first action on the invoice
-    # @api.multi
-    # def action_date_assign(self):
-    #     report_obj = self.env['ir.actions.report.xml']
-    #     report = report_obj.with_context(ignore_state=True).get_report(
-    #         'account.invoice', self.ids)
-    #     if (
-    #             report and report.account_invoice_split_invoice and
-    #             report.account_invoice_lines_to_split):
-    #         self.split_invoice(report.account_invoice_lines_to_split)
-    #     return super(account_invoice, self).action_date_assign()
+    @api.multi
+    def action_date_assign(self):
+        report_obj = self.env['ir.actions.report.xml']
+        report = report_obj.with_context(ignore_state=True).get_report(
+            'account.invoice', self.ids)
+        if (
+                report and report.account_invoice_split_invoice and
+                report.account_invoice_lines_to_split):
+            self.split_invoice(report.account_invoice_lines_to_split)
+        return super(account_invoice, self).action_date_assign()
