@@ -40,13 +40,14 @@ Report Configurator - Account
     'data': [
         'views/report_view.xml',
         'views/account_invoice_view.xml',
-        'report_extended_invoice.xml',
+        # TODO migrate invoice report
+        # 'report_extended_invoice.xml',
     ],
     'demo': [
     ],
     'test': [
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
     'application': False,
 }
