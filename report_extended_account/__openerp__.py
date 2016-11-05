@@ -35,10 +35,14 @@ Report Configurator - Account
     ],
     'depends': [
         'report_extended',
-        'account',
+        # for receiptbooks
+        'account_document',
+        # 'account',
     ],
     'data': [
-        'views/report_view.xml',
+        'views/report_invoice_view.xml',
+        'views/report_payment_view.xml',
+        'views/account_payment_view.xml',
         'views/account_invoice_view.xml',
         # TODO migrate invoice report
         # 'report_extended_invoice.xml',
