@@ -28,7 +28,7 @@ class AccountPayment(models.Model):
             default_use_template=bool(template),
             default_template_id=template.id,
             default_composition_mode='comment',
-            mark_invoice_as_sent=True,
+            # mark_invoice_as_sent=True,
         )
         return {
             'name': _('Compose Email'),
