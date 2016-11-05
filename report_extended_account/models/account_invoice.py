@@ -36,7 +36,7 @@ class account_invoice(models.Model):
         self.ensure_one()
         self.sent = True
         report_name = self.env['ir.actions.report.xml'].get_report_name(
-            'account.invoice', self.ids)
+            self._name, self.ids)
         return self.env['report'].get_action(self, report_name)
 
     @api.multi

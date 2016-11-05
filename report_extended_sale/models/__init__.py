@@ -5,5 +5,6 @@
 ##############################################################################
 from . import sale
 from . import report
-from . import account_invoice
+# TODO borrar o implementar
+# from . import account_invoice
 from . import company

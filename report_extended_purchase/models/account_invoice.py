@@ -14,7 +14,7 @@ class AccountInvoice(models.Model):
         """
         if not self.purchase_id:
             return {}
-        comment = self.purchase_id.comment
+        comment = self.purchase_id.notes
         internal_notes = self.purchase_id.internal_notes
         if self.comment:
             comment = '%s\n%s' % (self.comment, comment)

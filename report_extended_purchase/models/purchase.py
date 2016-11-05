@@ -15,7 +15,7 @@ class PurchaseOrder(models.Model):
     def print_quotation(self):
         self.write({'state': "sent"})
         report_name = self.env['ir.actions.report.xml'].get_report_name(
-            'purchase.order', self.ids)
+            self._name, self.ids)
         return self.env['report'].get_action(self, report_name)
 
     @api.model
