@@ -5,3 +5,4 @@
 ##############################################################################
 from . import purchase
 from . import report
+from . import account_invoice

@@ -8,25 +8,6 @@
 	        <field name="global" eval="True"/>
 	        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
 	    </record> 
-
-       	<!-- Access rules -->
-		
-		<record id="access_report_configuration_line" model="ir.model.access">
-			<field name="model_id" ref="model_report_configuration_line"/>
-			<field name="name">access.model_report_configuration_line</field>
-			<field eval="1" name="perm_read"/>
-			<field eval="1" name="perm_write"/>
-			<field eval="1" name="perm_create"/>
-			<field eval="1" name="perm_unlink"/>
-		</record>
-		
-		<record id="access_report_configuration_default" model="ir.model.access">
-			<field name="model_id" ref="model_report_configuration_default"/>
-			<field name="name">access.model_report_configuration_default</field>
-			<field eval="1" name="perm_read"/>
-			<field eval="1" name="perm_write"/>
-			<field eval="1" name="perm_create"/>
-			<field eval="1" name="perm_unlink"/>
-		</record>
+	    <!-- TODO ver si agregamos esta a csv base.access_ir_actions_report_xml_all,ir_actions_report_xml,base.model_ir_actions_report_xml,,1,1,1,1 -->
 	</data>
 </openerp>

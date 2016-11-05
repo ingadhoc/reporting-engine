@@ -26,7 +26,7 @@
     'summary': '',
     'description': """
 Report Configurator - Stock
-=============================
+===========================
     """,
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
@@ -46,7 +46,7 @@ Report Configurator - Stock
     ],
     'test': [
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
     'application': False,
 }

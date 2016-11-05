@@ -31,11 +31,13 @@ class account_invoice(models.Model):
         return res
 
     def check_sale_order_paid(self, cr, uid, ids, context=None):
-        '''Esta funcion la hacemos para verificar si toda la orden de venta fue pagada en el caso de
-         'pago antes de la entrega' porque el problema es el siguiente, de manera original openerp
-         genera una factura que queda vinculada por el subflow avisando cuando fue pagada a la orden de venta, 
-         el problema es que en este caso tendriamos mas de una factura ligada, por eso el chequeo hay que hacerlo aparte
-         '''
+        '''Esta funcion la hacemos para verificar si toda la orden de venta
+        fue pagada en el caso de pago antes de la entrega' porque el problema
+        es el siguiente, de manera original openerp genera una factura que
+        queda vinculada por el subflow avisando cuando fue pagada a la orden
+        de venta, el problema es que en este caso tendriamos mas de una
+        factura ligada, por eso el chequeo hay que hacerlo aparte
+        '''
         sale_order_obj = self.pool.get('sale.order')
         so_ids = sale_order_obj.search(
             cr, uid, [('invoice_ids', 'in', ids)], context=context)

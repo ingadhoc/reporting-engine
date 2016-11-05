@@ -12,50 +12,56 @@ class stock_picking(models.Model):
     @api.multi
     def do_print_picking(self):
         '''This function prints the picking list'''
-        assert len(
-            self) == 1, 'This option should only be used for a single id at a time.'
-        report_obj = self.env['ir.actions.report.xml']
-        report_name = report_obj.with_context(
+        self.ensure_one()
+        self.write({'printed': True})
+        report_name = self.env['ir.actions.report.xml'].with_context(
             stock_report_type='picking_list').get_report_name(
-            'stock.picking', self.ids)
+            self._name, self.ids)
         return self.env['report'].get_action(self, report_name)
 
     @api.multi
     def do_print_voucher(self):
         '''This function prints the voucher'''
-        assert len(
-            self) == 1, 'This option should only be used for a single id at a time.'
-        report_obj = self.env['ir.actions.report.xml']
-        report_name = report_obj.with_context(
+        self.ensure_one()
+        self.write({'printed': True})
+        report_name = self.env['ir.actions.report.xml'].with_context(
             stock_report_type='voucher').get_report_name(
-            'stock.picking', self.ids)
+            self._name, self.ids)
         report = self.env['report'].get_action(self, report_name)
         if self._context.get('keep_wizard_open', False):
             report['type'] = 'ir.actions.report_dont_close_xml'
         return report
 
-    @api.model
-    def _get_invoice_vals(self, key, inv_type, journal_id, move):
-        vals = super(stock_picking, self)._get_invoice_vals(
-            key, inv_type, journal_id, move)
-        if move.picking_id.company_id.internal_notes:
-            vals.update({
-                'internal_notes': move.picking_id.note})
-        if 'comment' in vals and not move.picking_id.company_id.external_notes:
-            vals.pop('comment')
-        return vals
-
 
 class stock_move(models.Model):
     _inherit = 'stock.move'
 
-    @api.model
-    def _prepare_picking_assign(self, move):
-        res = super(stock_move, self)._prepare_picking_assign(move)
+    @api.cr_uid_ids_context
+    def _picking_assign(self, cr, uid, move_ids, context=None):
+        # TODO deberiamos mejroar esta horrible implmentacion
+        res = super(stock_move, self)._picking_assign(
+            cr, uid, move_ids, context=context)
+        move = self.browse(cr, uid, move_ids, context=context)[0]
+        pick_obj = self.pool.get("stock.picking")
+        picks = pick_obj.search(cr, uid, [
+            ('group_id', '=', move.group_id.id),
+            ('location_id', '=', move.location_id.id),
+            ('location_dest_id', '=', move.location_dest_id.id),
+            ('picking_type_id', '=', move.picking_type_id.id),
+            ('printed', '=', False),
+            ('state', 'in', [
+                'draft', 'confirmed', 'waiting',
+                'partially_available', 'assigned'])], limit=1, context=context)
+
+        vals = {}
+        sale_order = move.procurement_id.sale_line_id.order_id
         if move.picking_id.company_id.internal_notes:
-            res.update({
-                'note': move.procurement_id.sale_line_id.order_id.internal_notes})
+            vals.update({
+                'note': sale_order.internal_notes})
         if move.picking_id.company_id.external_notes:
-            res.update({
-                'observations': move.procurement_id.sale_line_id.order_id.note})
+            vals.update({
+                'observations': sale_order.note})
+        if picks:
+            pick_obj.write(cr, uid, picks, vals)
+
         return res
