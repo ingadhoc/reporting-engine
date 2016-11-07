@@ -34,7 +34,7 @@ Report Configurator - Purchase
     'images': [
     ],
     'depends': [
-        'report_extended',
+        'report_extended_account',
         'purchase',
     ],
     'data': [
