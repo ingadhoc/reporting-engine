@@ -18,9 +18,15 @@ class ir_actions_report(models.Model):
         domain=[('type', 'in', ['sale', 'sale_refund'])])
     account_invoice_split_invoice = fields.Boolean(
         'Split Inovice',
-        help='If true, when validating the invoice, if it contains more than the specified number of lines, new invoices will be generated.')
+        help='If true, when validating the invoice, if it contains more than '
+        'the specified number of lines, new invoices will be generated.')
     account_invoice_lines_to_split = fields.Integer(
         'Lines to split')
+    document_type_ids = fields.Many2many(
+        'account.document.type', 'report_account_document_type_rel',
+        'report_id', 'document_type_id',
+        string='Document Types',
+    )
 
     def get_domains(self, cr, model, record, context=None):
         domains = super(ir_actions_report, self).get_domains(
@@ -28,7 +34,9 @@ class ir_actions_report(models.Model):
         if model == 'account.invoice':
             account_invoice_state = False
 
-            # We user ignore_state to get the report to split invoice before
+            # TODO we should improove this
+
+            # We use ignore_state to get the report to split invoice before
             # the invoice is validated
             ignore_state = context.get('ignore_state', False)
             if ignore_state:
@@ -37,17 +45,79 @@ class ir_actions_report(models.Model):
                 account_invoice_state = ['proforma']
             elif record.state in ['open', 'paid', 'sale']:
                 account_invoice_state = ['approved_invoice']
-            # Search for especific report
-            domains.append([('account_invoice_state', 'in', account_invoice_state),
-                            ('account_invoice_journal_ids', '=', record.journal_id.id)])
-            # Search without state
-            domains.append(
-                [('account_invoice_state', 'in', account_invoice_state), ('account_invoice_journal_ids', '=', False)])
-            # Search without journal and state
-            domains.append([('account_invoice_state', '=', False),
-                            ('account_invoice_journal_ids', '=', record.journal_id.id)])
-            # Search without journal and without state
-            domains.append(
-                [('account_invoice_state', '=', False), ('account_invoice_journal_ids', '=', False)])
-            print 'domains', domains
+            # Search for especific state and document type and journal
+            domains.append([
+                ('account_invoice_state', 'in', account_invoice_state),
+                ('account_invoice_journal_ids', '=', record.journal_id.id),
+                ('document_type_ids', '=',
+                    record.document_type_id.id)])
+
+            # Search for especific state and document type without journal
+            domains.append([
+                ('account_invoice_state', 'in', account_invoice_state),
+                ('account_invoice_journal_ids', '=', False),
+                ('document_type_ids', '=',
+                    record.document_type_id.id)])
+
+            # Search for especific state and journal without document type
+            domains.append([
+                ('account_invoice_state', 'in', account_invoice_state),
+                ('account_invoice_journal_ids', '=', record.journal_id.id),
+                ('document_type_ids', '=', False)])
+
+            # Search for especific document type and journal without state
+            domains.append([
+                ('account_invoice_state', 'in', False),
+                ('account_invoice_journal_ids', '=', record.journal_id.id),
+                ('document_type_ids', '=',
+                    record.document_type_id.id)])
+
+            # Search for especific document type without state and journal
+            domains.append([
+                ('account_invoice_state', 'in', False),
+                ('account_invoice_journal_ids', '=', False),
+                ('document_type_ids', '=',
+                    record.document_type_id.id)])
+
+            # Search for especific journal without state and document type
+            domains.append([
+                ('account_invoice_state', 'in', False),
+                ('account_invoice_journal_ids', '=', record.journal_id.id),
+                ('document_type_ids', '=', False)])
+
+            # Search for especific document type without journal and
+            # without state
+            domains.append([
+                ('account_invoice_state', '=', False),
+                ('account_invoice_journal_ids', '=', False),
+                ('document_type_ids', '=',
+                    record.document_type_id.id)])
         return domains
+
+        # old domains without document type (TODO delete or add if needed)
+        # if model == 'account.invoice':
+        #     account_invoice_state = False
+
+        #     # We user ignore_state to get the report to split invoice before
+        #     # the invoice is validated
+        #     ignore_state = context.get('ignore_state', False)
+        #     if ignore_state:
+        #         account_invoice_state = ['approved_invoice', 'proforma', False]
+        #     elif record.state in ['proforma', 'proforma2']:
+        #         account_invoice_state = ['proforma']
+        #     elif record.state in ['open', 'paid', 'sale']:
+        #         account_invoice_state = ['approved_invoice']
+        #     # Search for especific report
+        #     domains.append([('account_invoice_state', 'in', account_invoice_state),
+        #                     ('account_invoice_journal_ids', '=', record.journal_id.id)])
+        #     # Search without state
+        #     domains.append(
+        #         [('account_invoice_state', 'in', account_invoice_state), ('account_invoice_journal_ids', '=', False)])
+        #     # Search without journal and state
+        #     domains.append([('account_invoice_state', '=', False),
+        #                     ('account_invoice_journal_ids', '=', record.journal_id.id)])
+        #     # Search without journal and without state
+        #     domains.append(
+        #         [('account_invoice_state', '=', False), ('account_invoice_journal_ids', '=', False)])
+        #     print 'domains', domains
+        # return domains
