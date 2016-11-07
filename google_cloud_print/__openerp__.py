@@ -27,8 +27,8 @@
         'base_report_to_printer',
         'google_account',
         # to improove user experience
-        'web_widget_one2many_tags',
-        'web_ir_actions_act_window_none',
+        # 'web_widget_one2many_tags',
+        # 'web_ir_actions_act_window_none',
     ],
     "data": [
         'views/res_users_view.xml',
@@ -38,6 +38,6 @@
         'security/ir.model.access.csv',
     ],
     "demo": [],
-    "installable": False,
+    "installable": True,
     "version": '9.0.1.0.0',
 }
