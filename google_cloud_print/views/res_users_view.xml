@@ -27,10 +27,10 @@
         </record>
 
     <!-- "My Preferences -->
-    <record model="ir.ui.view" id="view_printing_users_prefs">
+    <record model="ir.ui.view" id="view_users_form_simple_modif">
         <field name="name">res.users.form.printing</field>
         <field name="model">res.users</field>
-        <field name="inherit_id" ref="base_report_to_printer.view_printing_users_prefs" />
+        <field name="inherit_id" ref="base_report_to_printer.view_users_form_simple_modif" />
         <field name="arch" type="xml">
             <group name="printing" position="before">
                 <group string="Google Cloud Print" name="gcp">
@@ -43,7 +43,9 @@
                     </div>
                     <label for="gcprinter_ids" attrs="{'invisible': [('google_cloudprint_rtoken', '=', False)]}"/>
                     <div class="oe_inline" attrs="{'invisible': [('google_cloudprint_rtoken', '=', False)]}">
-                        <field name="gcprinter_ids" class="oe_inline" widget="one2many_tags" readonly="0"/>
+                        <!-- TODO use one2many_tags -->
+                        <field name="gcprinter_ids" class="oe_inline" widget="many2many_tags" readonly="0"/>
+                        <!-- <field name="gcprinter_ids" class="oe_inline" widget="one2many_tags" readonly="0"/> -->
                         <a href="https://www.google.com/cloudprint#jobs" target="_blank">⇒ Check Jobs on GCP</a>
                         <a href="https://www.google.com/cloudprint#printers" target="_blank">⇒ Manage Printers on GCP</a>
                     </div>
