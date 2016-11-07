@@ -67,21 +67,21 @@ class ir_actions_report(models.Model):
 
             # Search for especific document type and journal without state
             domains.append([
-                ('account_invoice_state', 'in', False),
+                ('account_invoice_state', '=', False),
                 ('account_invoice_journal_ids', '=', record.journal_id.id),
                 ('document_type_ids', '=',
                     record.document_type_id.id)])
 
             # Search for especific document type without state and journal
             domains.append([
-                ('account_invoice_state', 'in', False),
+                ('account_invoice_state', '=', False),
                 ('account_invoice_journal_ids', '=', False),
                 ('document_type_ids', '=',
                     record.document_type_id.id)])
 
             # Search for especific journal without state and document type
             domains.append([
-                ('account_invoice_state', 'in', False),
+                ('account_invoice_state', '=', False),
                 ('account_invoice_journal_ids', '=', record.journal_id.id),
                 ('document_type_ids', '=', False)])
 
