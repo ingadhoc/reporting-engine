@@ -92,21 +92,14 @@ class ir_actions_report(models.Model):
                 ('account_invoice_journal_ids', '=', False),
                 ('document_type_ids', '=',
                     record.document_type_id.id)])
-        return domains
 
-        # old domains without document type (TODO delete or add if needed)
-        # if model == 'account.invoice':
-        #     account_invoice_state = False
+            # Search without journal, state and document type
+            domains.append([
+                ('account_invoice_state', '=', False),
+                ('account_invoice_journal_ids', '=', False),
+                ('document_type_ids', '=', False)])
 
-        #     # We user ignore_state to get the report to split invoice before
-        #     # the invoice is validated
-        #     ignore_state = context.get('ignore_state', False)
-        #     if ignore_state:
-        #         account_invoice_state = ['approved_invoice', 'proforma', False]
-        #     elif record.state in ['proforma', 'proforma2']:
-        #         account_invoice_state = ['proforma']
-        #     elif record.state in ['open', 'paid', 'sale']:
-        #         account_invoice_state = ['approved_invoice']
+        # TODO remove or add, old domains
         #     # Search for especific report
         #     domains.append([('account_invoice_state', 'in', account_invoice_state),
         #                     ('account_invoice_journal_ids', '=', record.journal_id.id)])
@@ -120,4 +113,4 @@ class ir_actions_report(models.Model):
         #     domains.append(
         #         [('account_invoice_state', '=', False), ('account_invoice_journal_ids', '=', False)])
         #     print 'domains', domains
-        # return domains
+        return domains
