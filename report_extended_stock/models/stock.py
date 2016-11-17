@@ -28,8 +28,9 @@ class stock_picking(models.Model):
             stock_report_type='voucher').get_report_name(
             self._name, self.ids)
         report = self.env['report'].get_action(self, report_name)
-        if self._context.get('keep_wizard_open', False):
-            report['type'] = 'ir.actions.report_dont_close_xml'
+        # funcionalidad depreciada
+        # if self._context.get('keep_wizard_open', False):
+        #     report['type'] = 'ir.actions.report_dont_close_xml'
         return report
 
 
