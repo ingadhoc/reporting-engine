@@ -3,15 +3,16 @@
 # * report_extended
 # 
 # Translators:
-# emiq2 <eq@ingadhoc.com>, 2016
+# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2016
+# Javier Diez <jd@adhoc.com.ar>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: reporting-engine (8.0)\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-03 12:44+0000\n"
-"PO-Revision-Date: 2016-09-03 12:59+0000\n"
-"Last-Translator: emiq2 <eq@ingadhoc.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/adhoc/ingadhoc-reporting-engine-8-0/language/es/)\n"
+"POT-Creation-Date: 2016-11-11 13:14+0000\n"
+"PO-Revision-Date: 2016-11-11 13:14+0000\n"
+"Last-Translator: Javier Diez <jd@adhoc.com.ar>, 2016\n"
+"Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,18 +20,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: report_extended
-#: field:report.configuration.default,apply_to_all:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_apply_to_all
 msgid "Apply To All Models"
 msgstr "Aplicar a Todos los Modelos"
 
 #. module: report_extended
-#: field:report.configuration.default,apply_to_model_id:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_apply_to_model_id
 msgid "Apply To Model"
 msgstr "Aplicar a Modelo"
 
 #. module: report_extended
-#: view:ir.actions.report.xml:report_extended.act_report_extended_xml_view
-#: field:ir.actions.report.xml,background_image:0
+#: model:ir.model.fields,field_description:report_extended.field_ir_act_report_xml_background_image
+#: model:ir.ui.view,arch_db:report_extended.act_report_extended_xml_view
 msgid "Background Image"
 msgstr "Imágen de Fondo"
 
@@ -46,7 +47,7 @@ msgid "Companies"
 msgstr "Compañías"
 
 #. module: report_extended
-#: field:ir.actions.report.xml,company_id:0
+#: model:ir.model.fields,field_description:report_extended.field_ir_act_report_xml_company_id
 msgid "Company"
 msgstr "Compañía"
 
@@ -56,26 +57,26 @@ msgid "Company Logo"
 msgstr "Logo de la Compañia"
 
 #. module: report_extended
-#: help:res.company,report_company_name:0
+#: model:ir.model.fields,help:report_extended.field_res_company_report_company_name
 msgid "Company name to be printed on reports"
 msgstr "Nombre de la Compañía a ser impreso en reportes"
 
 #. module: report_extended
-#: field:ir.actions.report.xml,line_ids:0
+#: model:ir.model.fields,field_description:report_extended.field_ir_act_report_xml_line_ids
 msgid "Configuration lines"
 msgstr "Lineas de Configuración"
 
 #. module: report_extended
-#: field:report.configuration.default,create_uid:0
-#: field:report.configuration.line,create_uid:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_create_uid
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_create_uid
 msgid "Created by"
-msgstr "Created by"
+msgstr "Creado por"
 
 #. module: report_extended
-#: field:report.configuration.default,create_date:0
-#: field:report.configuration.line,create_date:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_create_date
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_create_date
 msgid "Created on"
-msgstr "Created on"
+msgstr "Creado el"
 
 #. module: report_extended
 #: model:ir.model,name:report_extended.model_report_configuration_default
@@ -83,8 +84,8 @@ msgid "Default Keys For Reports"
 msgstr "Claves por Defecto para Reportes"
 
 #. module: report_extended
-#: field:report.configuration.default,display_name:0
-#: field:report.configuration.line,display_name:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_display_name
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_display_name
 msgid "Display Name"
 msgstr "Nombre"
 
@@ -94,51 +95,53 @@ msgid "Do not print log"
 msgstr "No imprimir el log"
 
 #. module: report_extended
-#: field:report.configuration.default,id:0
-#: field:report.configuration.line,id:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_id
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_id
 msgid "ID"
 msgstr "ID"
 
 #. module: report_extended
-#: help:report.configuration.default,override_values:0
+#: model:ir.model.fields,help:report_extended.field_report_configuration_default_override_values
 msgid ""
 "If true, override values in already created Aeroo Report Configuration when "
 "saved."
-msgstr "Si esta marcado, sobreescribe los valores en Configuraciones de Reportes de Aeroo ya almacenados."
+msgstr ""
+"Si esta marcado, sobreescribe los valores en Configuraciones de Reportes de "
+"Aeroo ya almacenados."
 
 #. module: report_extended
-#: view:ir.actions.report.xml:report_extended.act_report_extended_xml_view
+#: model:ir.ui.view,arch_db:report_extended.act_report_extended_xml_view
 msgid "Images"
 msgstr "Imagenes"
 
 #. module: report_extended
-#: field:report.configuration.default,name:0
-#: field:report.configuration.line,name:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_name
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_name
 msgid "Key"
 msgstr "Clave"
 
 #. module: report_extended
-#: view:ir.actions.report.xml:report_extended.act_report_extended_xml_view
+#: model:ir.ui.view,arch_db:report_extended.act_report_extended_xml_view
 msgid "Key Lines"
 msgstr "Líneas de Claves"
 
 #. module: report_extended
-#: field:report.configuration.default,__last_update:0
-#: field:report.configuration.line,__last_update:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default___last_update
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line___last_update
 msgid "Last Modified on"
 msgstr "Última Modificación en"
 
 #. module: report_extended
-#: field:report.configuration.default,write_uid:0
-#: field:report.configuration.line,write_uid:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_write_uid
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Última Actualización por"
 
 #. module: report_extended
-#: field:report.configuration.default,write_date:0
-#: field:report.configuration.line,write_date:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_write_date
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_write_date
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Última Actualización el"
 
 #. module: report_extended
 #: model:ir.model,name:report_extended.model_report_configuration_line
@@ -146,8 +149,8 @@ msgid "Line of the configuration information"
 msgstr "Linea de la información de la configuración"
 
 #. module: report_extended
-#: view:ir.actions.report.xml:report_extended.act_report_extended_xml_view
-#: field:ir.actions.report.xml,logo:0
+#: model:ir.model.fields,field_description:report_extended.field_ir_act_report_xml_logo
+#: model:ir.ui.view,arch_db:report_extended.act_report_extended_xml_view
 msgid "Logo"
 msgstr "Logo"
 
@@ -158,29 +161,29 @@ msgid "No report defined"
 msgstr "No hay reporte definido"
 
 #. module: report_extended
-#: field:report.configuration.default,override_values:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_override_values
 msgid "Override Values"
 msgstr "Sobreescribir Valores"
 
 #. module: report_extended
-#: field:ir.actions.report.xml,print_logo:0
+#: model:ir.model.fields,field_description:report_extended.field_ir_act_report_xml_print_logo
 msgid "Print Logo"
 msgstr "Imprimir Logo"
 
 #. module: report_extended
 #: model:ir.model,name:report_extended.model_report
-#: field:report.configuration.line,report_id:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_report_id
 msgid "Report"
 msgstr "Reporte"
 
 #. module: report_extended
-#: field:res.company,report_company_name:0
+#: model:ir.model.fields,field_description:report_extended.field_res_company_report_company_name
 msgid "Report Company Name"
 msgstr "Nombre Cia. para Reportes"
 
 #. module: report_extended
-#: view:report.configuration.default:report_extended.view_report_configuration_default_tree
-#: view:report.configuration.line:report_extended.view_report_configuration_line_tree
+#: model:ir.ui.view,arch_db:report_extended.view_report_configuration_default_tree
+#: model:ir.ui.view,arch_db:report_extended.view_report_configuration_line_tree
 msgid "Report Configuration"
 msgstr "Configuración de Reporte"
 
@@ -190,8 +193,8 @@ msgid "Report Configuration Key Values"
 msgstr "Clave Valor de la Configuración de Reporte"
 
 #. module: report_extended
-#: view:report.configuration.default:report_extended.view_report_configuration_default_form
-#: view:report.configuration.line:report_extended.view_report_configuration_line_form
+#: model:ir.ui.view,arch_db:report_extended.view_report_configuration_default_form
+#: model:ir.ui.view,arch_db:report_extended.view_report_configuration_line_form
 msgid "Report Configuration Line"
 msgstr "Linea de Configuración de Reporte"
 
@@ -201,7 +204,7 @@ msgid "Report Default Keys"
 msgstr "Claves por Defecto de los Reportes"
 
 #. module: report_extended
-#: field:ir.actions.report.xml,sequence:0
+#: model:ir.model.fields,field_description:report_extended.field_ir_act_report_xml_sequence
 msgid "Sequence"
 msgstr "Secuencia"
 
@@ -223,30 +226,35 @@ msgid "There is no report defined for this conditions."
 msgstr "No hay reporte definido para estas condiciones."
 
 #. module: report_extended
-#: view:ir.actions.report.xml:report_extended.act_report_extended_xml_view
+#: model:ir.ui.view,arch_db:report_extended.act_report_extended_xml_view
 msgid "Update Lines from Defaults"
 msgstr "Actualizar lineas desde aquellas por Defecto"
 
 #. module: report_extended
-#: field:ir.actions.report.xml,use_background_image:0
+#: model:ir.model.fields,field_description:report_extended.field_ir_act_report_xml_use_background_image
 msgid "Use Background Image"
 msgstr "Usar imágen de fondo"
 
 #. module: report_extended
-#: help:ir.actions.report.xml,sequence:0
+#: model:ir.model.fields,help:report_extended.field_ir_act_report_xml_sequence
 msgid "Used to order priority of reports"
 msgstr "Usado para ordenar la prioridad de reportes"
 
 #. module: report_extended
-#: field:report.configuration.default,value_boolean:0
-#: field:report.configuration.default,value_text:0
-#: field:report.configuration.line,value_boolean:0
-#: field:report.configuration.line,value_text:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_value_boolean
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_value_text
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_value_boolean
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_value_text
 msgid "Value"
 msgstr "Valor"
 
 #. module: report_extended
-#: field:report.configuration.default,value_type:0
-#: field:report.configuration.line,value_type:0
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_default_value_type
+#: model:ir.model.fields,field_description:report_extended.field_report_configuration_line_value_type
 msgid "Value Type"
 msgstr "Tipo del Valor"
+
+#. module: report_extended
+#: model:ir.model,name:report_extended.model_ir_actions_report_xml
+msgid "ir.actions.report.xml"
+msgstr ""
