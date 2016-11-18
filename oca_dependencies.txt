@@ -1,3 +1,4 @@
 oca-report-print-send https://github.com/oca/report-print-send.git
 ingadhoc-stock https://github.com/ingadhoc/stock.git
 ingadhoc-account-financial-tools https://github.com/ingadhoc/account-financial-tools.git
+ingadhoc-payment https://github.com/ingadhoc/account-payment.git

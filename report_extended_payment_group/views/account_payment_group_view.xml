@@ -1,0 +1,15 @@
+<openerp>
+    <data>        
+        <record id="view_account_payment_group_form" model="ir.ui.view">
+            <field name="name">account.payment.group.form</field>
+            <field name="model">account.payment.group</field>
+            <field name="inherit_id" ref="account_payment_group.view_account_payment_group_form"/>
+            <field name="arch" type="xml">
+                <button position="before">
+                    <button name="action_payment_sent" type="object" string="Send by Email" attrs="{'invisible':[('state', '!=', 'posted')]}" class="oe_highlight" groups="base.group_user"/>
+                    <button name="payment_print" string="Print" type="object" attrs="{'invisible':[('state', '!=', 'posted')]}" class="oe_highlight" groups="base.group_user"/>
+                </button>                
+            </field>
+        </record>
+    </data>
+</openerp>
