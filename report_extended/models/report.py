@@ -6,7 +6,7 @@
 from openerp import models
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
-import conversor
+from . import conversor
 
 
 class Report(models.Model):
@@ -16,12 +16,14 @@ class Report(models.Model):
         # TODO mejorar este metodo para que sea "heredado"
         """This method generates and returns html version of a report.
         """
-        # If the report is using a custom model to render its html, we must use it.
+        # If the report is using a custom model to render its html, we must use
+        # it.
         # Otherwise, fallback on the generic html rendering.
         try:
             report_model_name = 'report.%s' % report_name
             particularreport_obj = self.pool[report_model_name]
-            return particularreport_obj.render_html(cr, uid, ids, data=data, context=context)
+            return particularreport_obj.render_html(
+                cr, uid, ids, data=data, context=context)
         except KeyError:
             def to_word(val):
                 return conversor.to_word(val)
@@ -42,24 +44,31 @@ class Report(models.Model):
                         {report_conf_line.name: report_conf_line.value_text})
                 elif report_conf_line.value_type == 'boolean':
                     docargs.update(
-                        {report_conf_line.name: report_conf_line.value_boolean})
-            return self.render(cr, uid, [], report.report_name, docargs, context=context)
+                        {report_conf_line.name: (
+                            report_conf_line.value_boolean)})
+            return self.render(
+                cr, uid, [], report.report_name, docargs, context=context)
 
 
 class ir_actions_report(models.Model):
     _inherit = 'ir.actions.report.xml'
 
     _columns = {
-        'sequence': fields.integer('Sequence', help="Used to order priority of reports"),
+        'sequence': fields.integer(
+            'Sequence', help="Used to order priority of reports"),
         'line_ids': fields.one2many('report.configuration.line', 'report_id',
                                     string='Configuration lines'),
-        'print_logo': fields.selection([('no_logo', 'Do not print log'),
-                                        ('company_logo', 'Company Logo'),
-                                        ('specified_logo', 'Specified Logo')], 'Print Logo', required=True),
+        'print_logo': fields.selection([
+            ('no_logo', 'Do not print log'),
+            ('company_logo', 'Company Logo'),
+            ('specified_logo', 'Specified Logo')],
+            'Print Logo',
+            required=True),
         'logo': fields.binary('Logo'),
         'use_background_image': fields.boolean('Use Background Image'),
         'background_image': fields.binary('Background Image'),
-        'company_id': fields.many2one('res.company', 'Company', change_default=True),
+        'company_id': fields.many2one(
+            'res.company', 'Company', change_default=True),
     }
 
     _defaults = {
@@ -79,13 +88,13 @@ class ir_actions_report(models.Model):
             record = record[0]
         domains = self.get_domains(cr, model, record, context=context)
 
-
         # TODO habria que mejorar esto porque se podria recibir un listado de
         # ids con distintas cias
         active_model_obj = self.pool.get(model)
         active_object = active_model_obj.browse(
             cr, uid, model_ids, context=context)
-        if hasattr(active_object, 'company_id') and active_object[0].company_id:
+        if hasattr(
+                active_object, 'company_id') and active_object[0].company_id:
             company = active_object.company_id
         else:
             company = self.pool['res.users'].browse(
@@ -101,7 +110,8 @@ class ir_actions_report(models.Model):
             if report_ids:
                 break
 
-            # If not company specific, then for any company (allowed to the user)
+            # If not company specific, then for any company (allowed to the
+            # user)
             report_ids = self.search(
                 cr, uid, domain, order='sequence', context=context)
             if report_ids:
@@ -127,8 +137,11 @@ class ir_actions_report(models.Model):
             for line in report.line_ids:
                 conf_line_name_id[line.name] = line.id
 
-            for key_value in key_value_obj.browse(cr, uid, all_ids, context=context):
-                if key_value.apply_to_all or key_value.apply_to_model_id.model == report.model:
+            for key_value in key_value_obj.browse(
+                    cr, uid, all_ids, context=context):
+                if (
+                        key_value.apply_to_all or
+                        key_value.apply_to_model_id.model == report.model):
                     vals = {'name': key_value.name, 'report_id': report.id}
                     if key_value.value_type == 'text':
                         vals['value_type'] = 'text'
@@ -163,11 +176,15 @@ class report_configuration_line(models.Model):
 
     _columns = {
         'name': fields.char('Key', size=256, required=True),
-        'value_type': fields.selection([('text', 'Text'), ('boolean', 'Boolean')], 'Value Type', required=True),
+        'value_type': fields.selection(
+            [('text', 'Text'), ('boolean', 'Boolean')],
+            'Value Type', required=True),
         'value_text': fields.text('Value', required=False, translate=False),
         # 'value_text': fields.text('Value', required=False, translate=True),
         'value_boolean': fields.boolean('Value', required=False),
-        'report_id': fields.many2one('ir.actions.report.xml', 'Report', required=True, ondelete='cascade'),
+        'report_id': fields.many2one(
+            'ir.actions.report.xml', 'Report',
+            required=True, ondelete='cascade'),
     }
 
 
@@ -178,9 +195,15 @@ class configuration_default(models.Model):
     _columns = {
         'name': fields.char('Key', size=256, required=True),
         'apply_to_all': fields.boolean(string='Apply To All Models',),
-        'apply_to_model_id': fields.many2one('ir.model', string='Apply To Model', required=False),
-        'override_values': fields.boolean('Override Values', help='If true, override values in already created Aeroo Report Configuration when saved.'),
-        'value_type': fields.selection([('text', 'Text'), ('boolean', 'Boolean')], 'Value Type', required=True),
+        'apply_to_model_id': fields.many2one(
+            'ir.model', string='Apply To Model', required=False),
+        'override_values': fields.boolean(
+            'Override Values',
+            help='If true, override values in already created Aeroo Report '
+            'Configuration when saved.'),
+        'value_type': fields.selection(
+            [('text', 'Text'), ('boolean', 'Boolean')],
+            'Value Type', required=True),
         'value_text': fields.text('Value', required=False, translate=False),
         # 'value_text': fields.text('Value', required=False, translate=True),
         'value_boolean': fields.boolean('Value', required=False),
@@ -190,33 +213,3 @@ class configuration_default(models.Model):
         'override_values': False,
         'apply_to_all': True,
     }
-
-    # def create(self, cr, uid, vals, context=None):
-    #     ids = super(configuration_default, self).create(cr, uid, vals, context=context)
-
-    #     configuration_obj = self.pool.get('ir.actions.report.xml')
-    # configuration_obj = self.pool.get('report.configuration')
-    #     conf_ids = False
-    #     if vals['apply_to_all'] == True:
-    #         conf_ids = configuration_obj.search(cr, uid, [], context=context)
-    #     else:
-    #         conf_ids = configuration_obj.search(cr, uid, [('model', '=', vals['apply_to_model_id'])], context=context)
-
-    #     configuration_obj.update_lines_that_apply(cr, uid, conf_ids, context=context)
-
-    #     return ids
-
-    # def write(self, cr, uid, ids, vals, context=None):
-    #     super(configuration_default, self).write(cr, uid, ids, vals, context=context)
-
-    #     for default_vk in self.browse(cr, uid, ids, context=context):
-    #         configuration_obj = self.pool.get('ir.actions.report.xml')
-    #         conf_ids = False
-    #         if default_vk.apply_to_all == True:
-    #             conf_ids = configuration_obj.search(cr, uid, [], context=context)
-    #         else:
-    #             conf_ids = configuration_obj.search(cr, uid, [('report_model_id', '=', default_vk.apply_to_model_id)], context=context)
-
-    #         configuration_obj.update_lines_that_apply(cr, uid, conf_ids, context=context)
-
-    #     return ids

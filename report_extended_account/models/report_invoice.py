@@ -99,18 +99,4 @@ class ir_actions_report(models.Model):
                 ('account_invoice_journal_ids', '=', False),
                 ('document_type_ids', '=', False)])
 
-        # TODO remove or add, old domains
-        #     # Search for especific report
-        #     domains.append([('account_invoice_state', 'in', account_invoice_state),
-        #                     ('account_invoice_journal_ids', '=', record.journal_id.id)])
-        #     # Search without state
-        #     domains.append(
-        #         [('account_invoice_state', 'in', account_invoice_state), ('account_invoice_journal_ids', '=', False)])
-        #     # Search without journal and state
-        #     domains.append([('account_invoice_state', '=', False),
-        #                     ('account_invoice_journal_ids', '=', record.journal_id.id)])
-        #     # Search without journal and without state
-        #     domains.append(
-        #         [('account_invoice_state', '=', False), ('account_invoice_journal_ids', '=', False)])
-        #     print 'domains', domains
         return domains
