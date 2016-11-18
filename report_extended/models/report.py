@@ -6,7 +6,7 @@
 from openerp import models
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
-import conversor
+from . import conversor
 
 
 class Report(models.Model):
