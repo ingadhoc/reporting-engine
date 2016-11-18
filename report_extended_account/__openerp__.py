@@ -44,8 +44,6 @@ Report Configurator - Account
         'views/report_payment_view.xml',
         'views/account_payment_view.xml',
         'views/account_invoice_view.xml',
-        # TODO migrate invoice report
-        # 'report_extended_invoice.xml',
     ],
     'demo': [
     ],
