@@ -9,7 +9,7 @@
                 <notebook>
                     <page string="Account Payment Group Information" attrs="{'invisible':[('model','!=', 'account.payment.group')]}">
                         <group>
-                            <field name="payment_type"/>
+                            <field name="partner_type"/>
                             <field name="receiptbook_ids"/>
                         </group>
                     </page>

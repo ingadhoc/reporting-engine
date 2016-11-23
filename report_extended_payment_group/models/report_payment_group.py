@@ -12,8 +12,9 @@ class ir_actions_report(models.Model):
         'receiptbook_id',
         'ReceiptBooks',
     )
-    payment_type = fields.Selection(
-        [('inbound', 'Inbound'), ('outbound', 'Outbound')],
+    partner_type = fields.Selection(
+        # [('inbound', 'Inbound'), ('outbound', 'Outbound')],
+        [('customer', 'Customer'), ('supplier', 'Vendor')],
         # [('payment', 'Payment'), ('receipt', 'Receipt')], 'Voucher Type', )
     )
 
@@ -23,21 +24,21 @@ class ir_actions_report(models.Model):
         if model == 'account.payment.group':
             # Search for especific report
             domains.append([
-                ('payment_type', '=', record.payment_type),
+                ('partner_type', '=', record.partner_type),
                 ('receiptbook_ids', '=', record.receiptbook_id.id)])
 
             # Search without type
             domains.append([
-                ('payment_type', '=', False),
+                ('partner_type', '=', False),
                 ('receiptbook_ids', '=', record.receiptbook_id.id)])
 
             # Search without journal and with type
             domains.append([
-                ('payment_type', '=', record.payment_type),
+                ('partner_type', '=', record.partner_type),
                 ('receiptbook_ids', '=', False)])
 
             # Search without journal and without type
             domains.append([
-                ('payment_type', '=', False),
+                ('partner_type', '=', False),
                 ('receiptbook_ids', '=', False)])
         return domains
