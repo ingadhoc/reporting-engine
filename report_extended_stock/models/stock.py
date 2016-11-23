@@ -52,10 +52,11 @@ class stock_move(models.Model):
     @api.model
     def _prepare_picking_assign(self, move):
         res = super(stock_move, self)._prepare_picking_assign(move)
-        if move.picking_id.company_id.internal_notes:
+        order = move.procurement_id.sale_line_id.order_id
+        if order.company_id.internal_notes:
             res.update({
-                'note': move.procurement_id.sale_line_id.order_id.internal_notes})
-        if move.picking_id.company_id.external_notes:
+                'note': order.internal_notes})
+        if order.company_id.external_notes:
             res.update({
-                'observations': move.procurement_id.sale_line_id.order_id.note})
+                'observations': order.note})
         return res
