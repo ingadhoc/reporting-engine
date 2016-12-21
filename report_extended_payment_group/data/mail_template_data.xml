@@ -10,7 +10,7 @@
         <record id="email_template_edi_payment_group" model="mail.template">
             <field name="name">Customer Payment - Send by Email</field>
             <field name="email_from">${(object.company_id.email or '')|safe}</field>
-            <field name="subject">${object.company_id.name|safe} Receipt (Ref ${object.reference or 'n/a' })</field>
+            <field name="subject">${object.company_id.name|safe} Receipt ${object.display_name or 'n/a'}</field>
             <field name="partner_to">${object.partner_id.id}</field>
             <field name="model_id" ref="account_payment_group.model_account_payment_group"/>
             <field name="auto_delete" eval="True"/>
@@ -24,7 +24,7 @@
     <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
        &nbsp;&nbsp;<strong>REFERENCES</strong><br />
        &nbsp;&nbsp;Receipt number: <strong>${object.display_name}</strong><br />
-       &nbsp;&nbsp;Receipt reference: <strong>${object.reference or 'n/a'}</strong><br />
+       &nbsp;&nbsp;Receipt reference: <strong>${object.communication or 'n/a'}</strong><br />
        &nbsp;&nbsp;Receipt total: <strong>${object.amount}</strong><br />
     </p>
     
