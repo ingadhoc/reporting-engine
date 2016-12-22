@@ -21,7 +21,7 @@ class PrintingPrinter(models.Model):
         ('cups', 'CUPS'),
         ('gcp', 'Google Cloud Print')],
         required=True,
-        default='CUPS',
+        default='cups',
     )
     # we add some help
     uri = fields.Char(help='URI in Google Print is the printer id')
