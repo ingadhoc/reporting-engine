@@ -24,6 +24,10 @@ class stock_picking(models.Model):
         '''This function prints the voucher'''
         self.ensure_one()
         self.write({'printed': True})
+        # no sure why but sometimes it cames other models as activemodel
+        # and it gives an error, for eg if you came from picking from sale
+        # order and print is enable on picking confirmation
+        self = self.with_context(active_model='stock.picking')
         report_name = self.env['ir.actions.report.xml'].with_context(
             stock_report_type='voucher').get_report_name(
             self._name, self.ids)
