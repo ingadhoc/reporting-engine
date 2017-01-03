@@ -8,6 +8,8 @@ Google Cloud Printer
 
 This module extends the functionality of direct printing. It allows to add your google cloud printers to odoo
 
+IMPORTANT: this module is not adapted yet to oca/report-print-send, for now you need to use the one located on ingadhoc/patches
+
 Installation
 ============
 

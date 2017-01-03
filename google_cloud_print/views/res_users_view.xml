@@ -30,7 +30,9 @@
     <record model="ir.ui.view" id="view_users_form_simple_modif">
         <field name="name">res.users.form.printing</field>
         <field name="model">res.users</field>
-        <field name="inherit_id" ref="base_report_to_printer.view_users_form_simple_modif" />
+        <!-- this is to inherit from oca base_report_to_printer -->
+        <!-- <field name="inherit_id" ref="base_report_to_printer.view_users_form_simple_modif" /> -->
+        <field name="inherit_id" ref="base_report_to_printer.view_printing_users_prefs" />
         <field name="arch" type="xml">
             <group name="printing" position="before">
                 <group string="Google Cloud Print" name="gcp">
