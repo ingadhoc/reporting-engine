@@ -25,7 +25,7 @@
        &nbsp;&nbsp;<strong>REFERENCES</strong><br />
        &nbsp;&nbsp;Receipt number: <strong>${object.display_name}</strong><br />
        &nbsp;&nbsp;Receipt reference: <strong>${object.communication or 'n/a'}</strong><br />
-       &nbsp;&nbsp;Receipt total: <strong>${object.amount}</strong><br />
+       &nbsp;&nbsp;Receipt total: <strong>${object.payments_amount}</strong><br />
     </p>
     
     <p>If you have any question, do not hesitate to contact us.</p>
