@@ -13,12 +13,12 @@ class stock_picking(models.Model):
     def do_print_picking(self):
         '''This function prints the picking list'''
         self.ensure_one()
+
         self.write({'printed': True})
-        # no sure why but sometimes it cames other models as activemodel
-        # and it gives an error, for eg if you came from picking from sale
-        # order and print is enable on picking confirmation
+        # if we print caming from other model then active id and active model
+        # is wrong and it raise an error with custom filename
         self = self.with_context(
-            active_model='stock.picking', active_id=self.id)
+            active_model=self._name, active_id=self.id, active_ids=self.ids)
 
         report_name = self.env['ir.actions.report.xml'].with_context(
             stock_report_type='picking_list').get_report_name(
@@ -29,12 +29,12 @@ class stock_picking(models.Model):
     def do_print_voucher(self):
         '''This function prints the voucher'''
         self.ensure_one()
-        self.write({'printed': True})
-        # no sure why but sometimes it cames other models as activemodel
-        # and it gives an error, for eg if you came from picking from sale
-        # order and print is enable on picking confirmation
+
+        # if we print caming from other model then active id and active model
+        # is wrong and it raise an error with custom filename
         self = self.with_context(
-            active_model='stock.picking', active_id=self.id)
+            active_model=self._name, active_id=self.id, active_ids=self.ids)
+
         report_name = self.env['ir.actions.report.xml'].with_context(
             stock_report_type='voucher').get_report_name(
             self._name, self.ids)
