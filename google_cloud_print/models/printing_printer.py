@@ -105,7 +105,13 @@ class PrintingPrinter(models.Model):
         Format could be pdf, qweb-pdf, raw, ...
 
         """
-        self.ensure_one()
+        if len(self) != 1:
+            _logger.error(
+                'Google cloud print called with %s but singleton is'
+                'expeted. Check printers configuration.' % self)
+            return super(PrintingPrinter, self).print_document(
+                report, content, format, copies=copies)
+        # self.ensure_one()
         if self.printer_type != 'gcp':
             return super(PrintingPrinter, self).print_document(
                 report, content, format, copies=copies)
@@ -121,12 +127,20 @@ class PrintingPrinter(models.Model):
         _logger.debug(
             'Sending job to Google Cloud printer %s' % (self.system_name))
 
-        self.env['google.cloudprint.config'].submit_job(
-            self.uri,
-            format,
-            file_name,
-            options,
-        )
+        # atrapamos el error y lo mandamos por el log para que no de piedrazo
+        # y posiblemente rompa interfaz
+        try:
+            self.env['google.cloudprint.config'].submit_job(
+                self.uri,
+                format,
+                file_name,
+                options,
+            )
+        except Exception, e:
+            # access_token = self.get_access_token()
+            _logger.error(
+                'Could not submit job to google cloud. This is what we get:\n'
+                '%s' % e)
 
         _logger.info("Printing job: '%s'" % (file_name))
         return True
