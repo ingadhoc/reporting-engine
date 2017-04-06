@@ -13,9 +13,10 @@ class PurchaseOrder(models.Model):
 
     @api.multi
     def print_quotation(self):
-        self.write({'state': "sent"})
+        # if PO was on draft, set it on sent
+        self.filtered(lambda x: x.state == 'draft').write({'state': "sent"})
 
-        # if we print caming from other model then active id and active model
+        # if we print coming from other model then active id and active model
         # is wrong and it raise an error with custom filename
         self = self.with_context(
             active_model=self._name, active_id=self.id, active_ids=self.ids)
