@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator - Payment Group',
-    'version': '9.0.1.1.0',
+    'version': '9.0.1.2.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -40,7 +40,6 @@ Report Configurator - Payment Group
     ],
     'data': [
         'views/report_payment_group_view.xml',
-        'views/account_payment_group_view.xml',
         'data/mail_template_data.xml',
     ],
     'demo': [
