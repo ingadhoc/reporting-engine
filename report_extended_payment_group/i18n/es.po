@@ -4,15 +4,13 @@
 # 
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2016
-# Javier Diez <jd@adhoc.com.ar>, 2017
-# Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 20:03+0000\n"
-"PO-Revision-Date: 2017-03-16 20:03+0000\n"
-"Last-Translator: Nicolas Mac Rouillon <nmr@ingadhoc.com>, 2017\n"
+"POT-Creation-Date: 2017-05-12 20:26+0000\n"
+"PO-Revision-Date: 2017-05-12 20:26+0000\n"
+"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2016\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,19 +153,9 @@ msgid "Payment Group"
 msgstr "Grupo de Pago"
 
 #. module: report_extended_payment_group
-#: model:ir.ui.view,arch_db:report_extended_payment_group.view_account_payment_group_form
-msgid "Print"
-msgstr "Imprimir"
-
-#. module: report_extended_payment_group
 #: model:mail.template,report_name:report_extended_payment_group.email_template_edi_payment_group
 msgid "Receipt_${(object.number or '').replace('/','_')}"
 msgstr "Recibo_${(object.number or '').replace('/','_')}"
-
-#. module: report_extended_payment_group
-#: model:ir.ui.view,arch_db:report_extended_payment_group.view_account_payment_group_form
-msgid "Send by Email"
-msgstr "Enviar por Email"
 
 #. module: report_extended_payment_group
 #: selection:ir.actions.report.xml,partner_type:0
