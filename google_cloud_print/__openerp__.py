@@ -26,6 +26,7 @@
     "depends": [
         'base_report_to_printer',
         'google_account',
+        'server_mode',
         # to improove user experience
         # 'web_widget_one2many_tags',
         # 'web_ir_actions_act_window_none',
