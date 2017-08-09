@@ -3,8 +3,9 @@
 # For copyright and license notices, see __openerp__.py file in module root
 # directory
 ##############################################################################
-from openerp import fields, models, api
+from openerp import fields, models, api, _
 from tempfile import mkstemp
+from openerp.addons.server_mode.mode import get_mode
 import os
 import logging
 _logger = logging.getLogger(__name__)
@@ -115,6 +116,11 @@ class PrintingPrinter(models.Model):
         if self.printer_type != 'gcp':
             return super(PrintingPrinter, self).print_document(
                 report, content, format, copies=copies)
+        if get_mode():
+            _logger.warning(_(
+                "You Can not Send Mail Because Odoo is not in Production "
+                "mode"))
+            return True
 
         fd, file_name = mkstemp()
         try:
