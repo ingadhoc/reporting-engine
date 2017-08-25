@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator - Website Portal Sale',
-    'version': '9.0.0.0.0',
+    'version': '9.0.1.0.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
