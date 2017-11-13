@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="orders_followup" inherit_id="website_portal_sale.orders_followup">
+            <xpath expr="//t[@t-set='report_url']" position="attributes">
+                <attribute name="t-value">'/report/pdf/%s/%s' % (i.get_report_name(), str(i.id))</attribute>
+            </xpath>
+            <xpath expr="//span[@t-esc='i.number']" position="attributes">
+                <attribute name="t-esc">i.display_name</attribute>
+            </xpath>
+        </template>
+
+        <template id="invoices" inherit_id="website_portal_sale.invoices" name="Invoices and Payments">
+          <xpath expr="//a" position="attributes">
+            <attribute name="t-att-href">'/report/pdf/%s/%s' % (invoice.get_report_name(), str(invoice.id))</attribute>
+            <attribute name="t-att-title">invoice.display_name</attribute>
+          </xpath>
+          <xpath expr="//t[@t-esc='invoice.number']" position="attributes">
+            <attribute name="t-esc">invoice.display_name</attribute>
+          </xpath>
+        </template>
+    </data>
+</odoo>

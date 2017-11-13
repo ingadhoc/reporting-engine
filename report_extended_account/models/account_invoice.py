@@ -29,6 +29,14 @@ class account_invoice(models.Model):
     )
 
     @api.multi
+    def get_report_name(self):
+        """
+        Para ser usado tmb, por ejemplo, desde qweb en website_portal
+        """
+        return self.env['ir.actions.report.xml'].get_report_name(
+            self._name, self.ids)
+
+    @api.multi
     def invoice_print(self):
         """ Print the invoice and mark it as sent, so that we can see more
             easily the next step of the workflow
@@ -39,8 +47,7 @@ class account_invoice(models.Model):
         # is wrong and it raise an error with custom filename
         self = self.with_context(
             active_model=self._name, active_id=self.id, active_ids=self.ids)
-        report_name = self.env['ir.actions.report.xml'].get_report_name(
-            self._name, self.ids)
+        report_name = self.get_report_name()
         return self.env['report'].get_action(self, report_name)
 
     @api.multi
