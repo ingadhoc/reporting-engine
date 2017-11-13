@@ -48,13 +48,22 @@ CENTENAS = (
 
 
 def to_word(number):
-    ans = to_word_int(int(number))
-    # ans = to_word_int(int(number)) + 'PESOS'
-    centavos = int(round((number - int(number)), 2) * 100)
+    # arreglamos error de redondeo de la versión de abajo, por ej. para número
+    # 178.099,57
+    import math
+    frac, whole = math.modf(number)
+    ans = to_word_int(int(whole))
+    centavos = int(round(frac * 100))
     if centavos > 0:
         ans += ' CON ' + to_word_int(centavos) + 'CENTAVOS'
-    # return ans.title()
-    # we prefer only first letter in upper case
+
+    # ans = to_word_int(int(number))conversor.to_word(
+    # # ans = to_word_int(int(number)) + 'PESOS'
+    # centavos = int(round((number - int(number)), 2) * 100)
+    # if centavos > 0:
+    #     ans += ' CON ' + to_word_int(centavos) + 'CENTAVOS'
+    # # return ans.title()
+    # # we prefer only first letter in upper case
     return ans.capitalize()
 
 
