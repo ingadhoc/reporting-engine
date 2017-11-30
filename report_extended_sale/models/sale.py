@@ -12,6 +12,14 @@ class sale_order(models.Model):
     internal_notes = fields.Text('Internal Notes')
 
     @api.multi
+    def get_report_name(self):
+        """
+        Para ser usado tmb, por ejemplo, desde qweb en website_portal
+        """
+        return self.env['ir.actions.report.xml'].get_report_name(
+            self._name, self.ids)
+
+    @api.multi
     def print_quotation(self):
         self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
 
@@ -20,8 +28,7 @@ class sale_order(models.Model):
         self = self.with_context(
             active_model=self._name, active_id=self.id, active_ids=self.ids)
 
-        report_name = self.env['ir.actions.report.xml'].get_report_name(
-            self._name, self.ids)
+        report_name = self.get_report_name()
         return self.env['report'].get_action(self, report_name)
 
     @api.multi
