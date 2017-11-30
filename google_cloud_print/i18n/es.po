@@ -3,14 +3,15 @@
 # * google_cloud_print
 # 
 # Translators:
-# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2016
+# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2017
+# Javier Diez <jd@adhoc.com.ar>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 19:19+0000\n"
-"PO-Revision-Date: 2017-03-14 19:19+0000\n"
-"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2016\n"
+"POT-Creation-Date: 2017-11-30 16:54+0000\n"
+"PO-Revision-Date: 2017-11-30 16:54+0000\n"
+"Last-Translator: Javier Diez <jd@adhoc.com.ar>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,7 +110,7 @@ msgstr "Última Actualización por"
 #. module: google_cloud_print
 #: model:ir.model.fields,field_description:google_cloud_print.field_google_cloudprint_config_write_date
 msgid "Last Updated on"
-msgstr "Última Actualización en"
+msgstr "Última Actualización el"
 
 #. module: google_cloud_print
 #: model:ir.model.fields,field_description:google_cloud_print.field_res_users_gcprinter_ids
@@ -164,6 +165,12 @@ msgstr "URI"
 #: model:ir.model,name:google_cloud_print.model_res_users
 msgid "Users"
 msgstr "Usuarios"
+
+#. module: google_cloud_print
+#: code:addons/google_cloud_print/models/printing_printer.py:120
+#, python-format
+msgid "You Can not Send Mail Because Odoo is not in Production mode"
+msgstr ""
 
 #. module: google_cloud_print
 #: code:addons/google_cloud_print/models/google_clodprint_config.py:47
