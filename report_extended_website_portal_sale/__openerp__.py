@@ -20,7 +20,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator - Website Portal Sale',
-    'version': '9.0.1.0.0',
+    'version': '9.0.1.1.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -31,7 +31,8 @@
     ],
     'depends': [
         'report_extended_account',
-        'website_portal_sale',
+        'report_extended_sale',
+        'website_sale',
     ],
     'data': [
         'views/portal_sale_template.xml',
