@@ -156,8 +156,8 @@ msgstr "Grupo de Pago"
 
 #. module: report_extended_payment_group
 #: model:mail.template,report_name:report_extended_payment_group.email_template_edi_payment_group
-msgid "Receipt_${(object.number or '').replace('/','_')}"
-msgstr "Recibo_${(object.number or '').replace('/','_')}"
+msgid "Receipt_${(object.display_name or '').replace('/','_')}"
+msgstr "Recibo_${(object.display_name or '').replace('/','_')}"
 
 #. module: report_extended_payment_group
 #: selection:ir.actions.report.xml,partner_type:0
