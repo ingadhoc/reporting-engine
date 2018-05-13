@@ -45,7 +45,7 @@ Report Configurator - Purchase
     ],
     'test': [
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': True,
     'application': False,
 }
