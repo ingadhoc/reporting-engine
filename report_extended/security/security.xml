@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<openerp>
+<odoo>
 	<data noupdate="1">
 	    <!-- Multi - Company Rules -->
 	    <record model="ir.rule" id="report_multicompany">
@@ -10,4 +10,4 @@
 	    </record> 
 	    <!-- TODO ver si agregamos esta a csv base.access_ir_actions_report_xml_all,ir_actions_report_xml,base.model_ir_actions_report_xml,,1,1,1,1 -->
 	</data>
-</openerp>
+</odoo>

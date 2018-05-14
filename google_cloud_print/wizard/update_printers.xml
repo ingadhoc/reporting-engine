@@ -1,4 +1,4 @@
-<openerp>
+<odoo>
 <data>
 	<!-- remove from cups from menu name -->
 	<record id="base_report_to_printer.menu_printer_update_wizard" model="ir.ui.menu">
@@ -18,4 +18,4 @@
 		</field>
 	</record>
 </data>
-</openerp>
+</odoo>

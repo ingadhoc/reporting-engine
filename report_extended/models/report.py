@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
-# For copyright and license notices, see __openerp__.py file in module root
+# For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from openerp import models
-from openerp.osv import fields, osv
-from openerp.tools.translate import _
+from odoo import models
+from odoo.osv import fields, osv
+from odoo.tools.translate import _
 from . import conversor
 
 

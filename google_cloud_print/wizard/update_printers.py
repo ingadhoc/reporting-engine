@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
-# For copyright and license notices, see __openerp__.py file in module root
+# For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from openerp import models, api, fields
-# from openerp.exceptions import Warning
+from odoo import models, api, fields
+# from odoo.exceptions import Warning
 import logging
 _logger = logging.getLogger(__name__)
 

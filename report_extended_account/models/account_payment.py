@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from openerp import models, api, _
+from odoo import models, api, _
 
 
 class AccountPayment(models.Model):

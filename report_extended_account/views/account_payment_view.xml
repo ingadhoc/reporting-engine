@@ -1,4 +1,4 @@
-<openerp>
+<odoo>
     <data>        
         <!-- for now we dont add it here because we use payment group instead -->
 <!--         <record id="view_account_payment_form" model="ir.ui.view">
@@ -13,4 +13,4 @@
             </field>
         </record> -->
     </data>
-</openerp>
+</odoo>

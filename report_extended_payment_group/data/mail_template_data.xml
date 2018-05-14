@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<openerp>
+<odoo>
     
 
     <!-- Mail template is done in a NOUPDATE block
@@ -67,4 +67,4 @@
             ]]></field>
         </record>
     </data>
-</openerp>
+</odoo>

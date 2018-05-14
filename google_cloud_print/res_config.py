@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
-# For copyright and license notices, see __openerp__.py file in module root
+# For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from openerp import models, fields, api
+from odoo import models, fields, api
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -44,7 +43,7 @@ class base_config_settings(models.TransientModel):
     @api.multi
     def set_google_cloudprint_authorization_code(self):
         self.ensure_one()
-        ICP = self.env['ir.config_parameter']
+        ICP = self.env['ir.config_parameter'].sudo()
         authorization_code = self.google_cloudprint_authorization_code
         if authorization_code and authorization_code != ICP.get_param(
                 'google_cloudprint_authorization_code'):
@@ -52,9 +51,7 @@ class base_config_settings(models.TransientModel):
                 'cloudprint', authorization_code)
             ICP.set_param(
                 'google_cloudprint_refresh_token',
-                refresh_token,
-                groups=['base.group_system'])
+                refresh_token)
         ICP.set_param(
             'google_cloudprint_authorization_code',
-            authorization_code,
-            groups=['base.group_system'])
+            authorization_code)

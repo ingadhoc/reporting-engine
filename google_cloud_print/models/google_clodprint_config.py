@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
-# For copyright and license notices, see __openerp__.py file in module root
+# For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from openerp import models, api, _, SUPERUSER_ID
-from openerp.exceptions import RedirectWarning, Warning
+from odoo import models, api, _, SUPERUSER_ID
+from odoo.exceptions import RedirectWarning, Warning
 import werkzeug.urls
 import urllib2
 import logging

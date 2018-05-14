@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
-# For copyright and license notices, see __openerp__.py file in module root
+# For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from openerp import fields, models, api, _
+from odoo import fields, models, api, _
 from tempfile import mkstemp
-from openerp.addons.server_mode.mode import get_mode
+from odoo.addons.server_mode.mode import get_mode
 import os
 import logging
 _logger = logging.getLogger(__name__)
@@ -142,7 +141,7 @@ class PrintingPrinter(models.Model):
                 file_name,
                 options,
             )
-        except Exception, e:
+        except Exception as e:
             # access_token = self.get_access_token()
             _logger.error(
                 'Could not submit job to google cloud. This is what we get:\n'

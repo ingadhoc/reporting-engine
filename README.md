@@ -1,4 +1,4 @@
-[![Runbot Status](http://runbot.adhoc.com.ar/runbot/badge/flat/25/11.0.svg)](http://runbot.adhoc.com.ar/runbot/repo/github-com-ingadhoc-reporting-engine-25)
+[![Runbot Status](http://runbot.adhoc.com.ar/runbot/badge/flat/29/11.0.svg)](http://runbot.adhoc.com.ar/runbot/repo/github-com-ingadhoc-reporting-engine-29)
 [![Build Status](https://travis-ci.org/ingadhoc/reporting-engine.svg?branch=11.0)](https://travis-ci.org/ingadhoc/reporting-engine)
 [![Coverage Status](https://coveralls.io/repos/ingadhoc/reporting-engine/badge.png?branch=11.0)](https://coveralls.io/r/ingadhoc/reporting-engine?branch=11.0)
 [![Code Climate](https://codeclimate.com/github/ingadhoc/reporting-engine/badges/gpa.svg)](https://codeclimate.com/github/ingadhoc/reporting-engine)
