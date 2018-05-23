@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+	<!-- Multi - Company Rules -->
+	<record model="ir.rule" id="report_multicompany">
+		<field name="name">Report multi-company</field>
+		<field name="model_id" ref="base.model_ir_actions_report"/>
+		<field name="global" eval="True"/>
+		<field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+	</record>
+	<!-- TODO ver si agregamos esta a csv base.access_ir_actions_report_xml_all,ir_actions_report_xml,base.model_ir_actions_report_xml,,1,1,1,1 -->
+</odoo>

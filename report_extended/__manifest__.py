@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Report Configurator',
-    'version': '9.0.1.0.0',
+    'version': '11.0.1.0.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -29,19 +29,19 @@
     'images': [
     ],
     'depends': [
-        'report',
+        'base',
     ],
     'data': [
         'views/company_view.xml',
-        'views/report_view.xml',
-        'security/security.xml',
+        'views/ir_actions_report_views.xml',
+        'views/report_configuration_default_views.xml',
+        'views/report_configuration_line_views.xml',
+        'security/report_extended_security.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [
     ],
-    'test': [
-    ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
     'application': False,
 }
