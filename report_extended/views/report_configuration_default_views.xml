@@ -1,0 +1,50 @@
+<odoo>
+
+    <!-- report_configuration_defaults -->
+    <record id="view_report_configuration_default_form" model="ir.ui.view">
+        <field name="name">report.configuration.line.form</field>
+        <field name="model">report.configuration.default</field>
+        <field name="arch" type="xml">
+            <form string="Report Configuration Line">
+                <group>
+                    <field name="name"/>
+                    <field name="apply_to_all"/>
+                    <field name="apply_to_model_id" widget="selection" attrs="{'invisible':[('apply_to_all','=',True)]}"/>
+                    <field name="value_type"/>
+                    <field name="override_values"/>
+                    <field name="value_boolean" attrs="{'invisible':[('value_type','!=', 'boolean')]}"/>
+                    <field name="value_text" attrs="{'invisible':[('value_type','!=', 'text')]}" colspan="4"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_report_configuration_default_tree" model="ir.ui.view">
+        <field name="name">report.configuration.line.tree</field>
+        <field name="model">report.configuration.default</field>
+        <field name="arch" type="xml">
+            <tree string="Report Configuration">
+                <field name="name"/>
+                <field name="apply_to_all"/>
+                <field name="apply_to_model_id"/>
+                <field name="value_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_report_configuration_defaults" model="ir.actions.act_window">
+        <field name="name">Report Configuration Key Values</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.configuration.default</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="report_configuration_defaults_menu"
+        action="action_report_configuration_defaults"
+        name="Report Default Keys"
+        parent="base.reporting_menuitem"
+        sequence="30" />
+
+</odoo>
