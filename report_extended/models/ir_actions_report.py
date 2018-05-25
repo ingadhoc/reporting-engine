@@ -151,6 +151,6 @@ class IrActionsReport(models.Model):
                         report_conf_line.value_boolean)})
         data.update({
             'report': report,
-            'to_word': to_word,
+            'to_word': conversor.to_word,
         })
         return super(IrActionsReport, self).render_qweb_html(docids, data=data)
