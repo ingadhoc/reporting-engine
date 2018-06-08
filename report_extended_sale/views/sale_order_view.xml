@@ -12,9 +12,9 @@
                 </field>
                 <div class="oe_clear" position="before">
                     <div class="oe_clear">
-                        <label for="internal_notes"/>
+                        <label for="internal_notes" groups="base.group_user"/>
                     </div>
-                    <field name="internal_notes" class="oe_inline" placeholder="Internal Notes..."/>
+                    <field name="internal_notes" class="oe_inline" placeholder="Internal Notes..." groups="base.group_user"/>
                 </div>
             </field>
         </record>
