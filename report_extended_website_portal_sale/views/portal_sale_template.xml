@@ -20,11 +20,11 @@
           </xpath>
         </template>
 
-        <template id="confirmation" inherit_id="website_sale.confirmation">
+      <!--   <template id="confirmation" inherit_id="website_sale.confirmation">
           <xpath expr="//a" position="attributes">
             <attribute name="t-att-href">'/report/pdf/%s/%s' % (order.get_report_name(), str(order.id))</attribute>
             <attribute name="href"></attribute>
           </xpath>
-        </template>
+        </template> -->
     </data>
 </odoo>
