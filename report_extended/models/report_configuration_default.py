@@ -5,7 +5,7 @@
 from odoo import models, fields
 
 
-class configuration_default(models.Model):
+class ConfigurationDefault(models.Model):
     _name = 'report.configuration.default'
     _description = 'Default Keys For Reports'
 

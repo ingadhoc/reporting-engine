@@ -5,21 +5,20 @@
 from odoo import models, fields
 
 
-class ir_actions_report(models.Model):
-    _inherit = 'ir.actions.report.xml'
+class IrActionsReport(models.Model):
+    _inherit = 'ir.actions.report'
 
     sale_order_state = fields.Selection(
         [('draft', 'Quotation'), ('progress', 'In Progress')],
         'Sale Order State', required=False)
 
-    def get_domains(self, cr, model, record, context=None):
-        domains = super(ir_actions_report, self).get_domains(
-            cr, model, record, context=context)
+    def get_domains(self, record):
+        domains = super(IrActionsReport, self).get_domains(record)
         if record.state in ['draft', 'sent']:
             sale_order_state = 'draft'
         else:
             sale_order_state = 'progress'
-        if model == 'sale.order':
+        if record._name == 'sale.order':
             # Search for especific report
             domains.append([('sale_order_state', '=', sale_order_state)])
             # Search without state defined

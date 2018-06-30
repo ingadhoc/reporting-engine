@@ -13,9 +13,10 @@ class AccountPaymentGroup(models.Model):
         self = self.with_context(
             active_model=self._name, active_id=self.id, active_ids=self.ids)
 
-        report_obj = self.env['ir.actions.report.xml']
-        report_name = report_obj.get_report_name(self._name, self.ids)
-        return self.env['report'].get_action(self, report_name)
+        report_obj = self.env['ir.actions.report']
+        report_name = report_obj.get_report_name(self)
+        return self.env['ir.actions.report'].search(
+            [('report_name', '=', report_name)], limit=1).report_action(self)
 
     @api.multi
     def action_payment_sent(self):

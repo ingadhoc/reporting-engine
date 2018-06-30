@@ -18,15 +18,11 @@
 #
 ##############################################################################
 {
-    'name': 'Report Configurator - Sale',
-    'version': '9.0.1.1.0',
+    'name': 'Report Extended Sale Integration',
+    'version': '11.0.1.0.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
-    'description': """
-Report Configurator - Sale
-=============================
-    """,
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
@@ -39,13 +35,11 @@ Report Configurator - Sale
     'data': [
         'views/report_view.xml',
         'views/sale_order_view.xml',
-        'views/company_view.xml'
+        # 'views/company_view.xml'
     ],
     'demo': [
     ],
-    'test': [
-    ],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
     'application': False,
 }

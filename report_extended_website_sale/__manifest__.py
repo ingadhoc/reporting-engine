@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (C) 2015  ADHOC SA  (http://www.adhoc.com.ar)
@@ -18,8 +19,8 @@
 #
 ##############################################################################
 {
-    'name': 'Report Configurator - Website Portal Sale',
-    'version': '9.0.1.2.0',
+    'name': 'Report Extended Website Sale Integration',
+    'version': '11.0.1.0.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -38,9 +39,8 @@
     ],
     'demo': [
     ],
-    'test': [
-    ],
     'installable': False,
-    'auto_install': True,
+    # TODO make auto install upon release to v11
+    'auto_install': False,
     'application': False,
 }

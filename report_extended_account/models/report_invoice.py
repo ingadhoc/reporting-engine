@@ -5,8 +5,8 @@
 from odoo import models, fields
 
 
-class ir_actions_report(models.Model):
-    _inherit = 'ir.actions.report.xml'
+class IrActionsReport(models.Model):
+    _inherit = 'ir.actions.report'
 
     account_invoice_state = fields.Selection(
         [('proforma', 'Pro-forma'), ('approved_invoice', 'Aproved Invoice')],
@@ -27,17 +27,16 @@ class ir_actions_report(models.Model):
         string='Document Types',
     )
 
-    def get_domains(self, cr, model, record, context=None):
-        domains = super(ir_actions_report, self).get_domains(
-            cr, model, record, context=context)
-        if model == 'account.invoice':
+    def get_domains(self, record):
+        domains = super(IrActionsReport, self).get_domains(record)
+        if record._name == 'account.invoice':
             account_invoice_state = False
 
             # TODO we should improove this
 
             # We use ignore_state to get the report to split invoice before
             # the invoice is validated
-            ignore_state = context.get('ignore_state', False)
+            ignore_state = self._context.get('ignore_state', False)
             if ignore_state:
                 account_invoice_state = ['approved_invoice', 'proforma', False]
             elif record.state in ['proforma', 'proforma2']:

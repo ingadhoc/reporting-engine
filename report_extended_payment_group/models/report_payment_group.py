@@ -1,8 +1,8 @@
 from odoo import models, fields
 
 
-class ir_actions_report(models.Model):
-    _inherit = 'ir.actions.report.xml'
+class IrActionsReport(models.Model):
+    _inherit = 'ir.actions.report'
 
     receiptbook_ids = fields.Many2many(
         'account.payment.receiptbook',
@@ -17,10 +17,9 @@ class ir_actions_report(models.Model):
         # [('payment', 'Payment'), ('receipt', 'Receipt')], 'Voucher Type', )
     )
 
-    def get_domains(self, cr, model, record, context=None):
-        domains = super(ir_actions_report, self).get_domains(
-            cr, model, record, context=context)
-        if model == 'account.payment.group':
+    def get_domains(self, record):
+        domains = super(IrActionsReport, self).get_domains(record)
+        if record._name == 'account.payment.group':
             # Search for especific report
             domains.append([
                 ('partner_type', '=', record.partner_type),

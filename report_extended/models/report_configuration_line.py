@@ -5,7 +5,7 @@
 from odoo import models, fields
 
 
-class report_configuration_line(models.Model):
+class ReportConfigurationLine(models.Model):
     _name = 'report.configuration.line'
     _description = 'Line of the configuration information'
 

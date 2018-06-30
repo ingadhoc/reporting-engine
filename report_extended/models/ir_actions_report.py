@@ -2,8 +2,10 @@
 # For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from odoo import models, fields, api, _
+from odoo import tools, models, fields, api, _
 from odoo.exceptions import UserError
+import datetime
+
 from . import conversor
 
 
@@ -44,14 +46,13 @@ class IrActionsReport(models.Model):
     )
 
     @api.model
-    def get_report_name(self, model, model_ids):
-        report = self.get_report(model, model_ids)
+    def get_report_name(self, records):
+        report = self.get_report(records)
         return report.report_name
 
     @api.model
-    def get_report(self, model, model_ids):
-        records = self.env[model].browse(model_ids)
-        domains = self.get_domains(model, records[0])
+    def get_report(self, records):
+        domains = self.get_domains(records[0])
 
         # TODO habria que mejorar esto porque se podria recibir un listado de
         # ids con distintas cias
@@ -59,10 +60,9 @@ class IrActionsReport(models.Model):
                 records, 'company_id') and records[0].company_id:
             company = records.company_id
         else:
-            company = self.env['res.users'].browse(
-                uid).company_id
+            company = self.env.user.company_id
         for domain in domains:
-            domain.append(('model', '=', model))
+            domain.append(('model', '=', records[0]._name))
 
             # Search for company specific
             domain_with_company = domain + [('company_id', '=', company.id)]
@@ -84,7 +84,7 @@ class IrActionsReport(models.Model):
         return report
 
     @api.model
-    def get_domains(self, model, record):
+    def get_domains(self, record):
         return []
 
     @api.multi
@@ -124,33 +124,94 @@ class IrActionsReport(models.Model):
             rec.update_lines_that_apply()
         return rec
 
-    @api.model
-    def render_qweb_html(self, docids, data=None):
-        # TODO mejorar este metodo para que sea "heredado"
-        """This method generates and returns html version of a report.
-        """
-        # If the report is using a custom model to render its html, we must use
-        # it.
-        # Otherwise, fallback on the generic html rendering.
-        if data is None:
-            data = {}
+    @api.multi
+    def _extend_report_context(self, docids, data=None):
+        company = self.env.user.company_id
+        # if we have company on the active object we prefer it
+        if 'active_model' in self._context and 'active_id' in self._context:
+            active_object = self.env[self._context['active_model']].browse(
+                self._context['active_id'])
+            if hasattr(
+                    active_object, 'company_id') and active_object.company_id:
+                company = active_object.company_id
 
-        # report_model_name = 'report.%s' % self.report_name
-        # report_model = self.env.get(report_model_name)
-        # report = self._get_report_from_name()
-        report = self
+        # We add logo
+        print_logo = False
+        if self.print_logo == 'specified_logo':
+            print_logo = self.logo
+        elif self.print_logo == 'company_logo':
+            if company.logo:
+                print_logo = company.logo
 
         # We add all the key-value pairs of the report configuration
-        for report_conf_line in report.line_ids:
-            if report_conf_line.value_type == 'text':
-                data.update(
-                    {report_conf_line.name: report_conf_line.value_text})
-            elif report_conf_line.value_type == 'boolean':
-                data.update(
-                    {report_conf_line.name: (
-                        report_conf_line.value_boolean)})
-        data.update({
-            'report': report,
-            'to_word': conversor.to_word,
+        # We add keys so that you can use it in a safe way in reports
+        # (like keys.get('key name'))
+        keys = {}
+        context_update = {}
+        for report_conf_line in self.line_ids:
+            key_value = report_conf_line.value_type == 'text' and \
+                report_conf_line.value_text or report_conf_line.value_boolean
+            context_update[report_conf_line.name] = key_value
+            keys[report_conf_line.name] = key_value
+
+        context_update.update({
+            'keys': keys,
+            'use_background_image': self.use_background_image,
+            'logo_report': print_logo,
+            'background_image': self.use_background_image and
+            self.background_image,
+            'number_to_string': conversor.to_word,
+            'partner_address': self.partner_address,
+            'net_price': self.net_price,
+            'datetime': datetime,
+            'tools': tools,
+            'company': company,
         })
+        return self.with_context(**context_update)
+
+    def net_price(self, gross_price, discount):
+        return gross_price * (1 - (discount / 100))
+
+    def partner_address(self, partner):
+        # TODO use odoo native fomat address function
+        ret = ''
+        if partner.street:
+            ret += partner.street
+        if partner.street2:
+            if partner.street:
+                ret += ' - ' + partner.street2
+            else:
+                ret += partner.street2
+        if ret != '':
+            ret += '. '
+
+        if partner.zip:
+            ret += '(' + partner.zip + ')'
+        if partner.city:
+            if partner.zip:
+                ret += ' ' + partner.city
+            else:
+                ret += partner.city
+        if partner.state_id:
+            if partner.city:
+                ret += ' - ' + partner.state_id.name
+            else:
+                ret += partner.state_id.name
+        if partner.zip or partner.city or partner.state_id:
+            ret += '. '
+
+        if partner.country_id:
+            ret += partner.country_id.name + '.'
+
+        return ret
+
+    # it should be api.multi but on odoo is defined as api.model
+    @api.model
+    def render_qweb_html(self, docids, data=None):
+        self = self._extend_report_context(docids, data=data)
         return super(IrActionsReport, self).render_qweb_html(docids, data=data)
+
+    @api.model
+    def render_aeroo(self, docids, data=None):
+        self = self._extend_report_context(docids, data=data)
+        return super(IrActionsReport, self).render_aeroo(docids, data)

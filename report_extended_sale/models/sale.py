@@ -5,7 +5,7 @@
 from odoo import models, fields, api
 
 
-class sale_order(models.Model):
+class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     internal_notes = fields.Text('Internal Notes')
@@ -15,8 +15,7 @@ class sale_order(models.Model):
         """
         Para ser usado tmb, por ejemplo, desde qweb en website_portal
         """
-        return self.env['ir.actions.report.xml'].get_report_name(
-            self._name, self.ids)
+        return self.env['ir.actions.report'].get_report_name(self)
 
     @api.multi
     def print_quotation(self):
@@ -28,11 +27,12 @@ class sale_order(models.Model):
             active_model=self._name, active_id=self.id, active_ids=self.ids)
 
         report_name = self.get_report_name()
-        return self.env['report'].get_action(self, report_name)
+        return self.env['ir.actions.report'].search(
+            [('report_name', '=', report_name)], limit=1).report_action(self)
 
     @api.multi
     def _prepare_invoice(self):
-        vals = super(sale_order, self)._prepare_invoice()
+        vals = super(SaleOrder, self)._prepare_invoice()
         if self.company_id.internal_notes:
             vals.update({
                 'internal_notes': self.internal_notes})

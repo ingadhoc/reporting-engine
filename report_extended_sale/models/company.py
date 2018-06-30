@@ -5,7 +5,7 @@
 from odoo import models, fields
 
 
-class res_company(models.Model):
+class ResCompany(models.Model):
     _inherit = 'res.company'
 
     # TODO this parameters should be global and not per company

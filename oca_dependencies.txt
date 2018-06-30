@@ -1,5 +1,6 @@
 # ingadhoc-patches https://github.com/ingadhoc/patches.git
-# ingadhoc-stock https://github.com/ingadhoc/stock.git
-# ingadhoc-account-financial-tools https://github.com/ingadhoc/account-financial-tools.git
-# ingadhoc-payment https://github.com/ingadhoc/account-payment.git
+ingadhoc-stock https://github.com/ingadhoc/stock.git
+ingadhoc-account-financial-tools https://github.com/ingadhoc/account-financial-tools.git
+ingadhoc-payment https://github.com/ingadhoc/account-payment.git
 # odoo-support https://github.com/ingadhoc/odoo-support.git
+ingadhoc-aeroo_reports https://github.com/ingadhoc/aeroo_reports

@@ -18,15 +18,11 @@
 #
 ##############################################################################
 {
-    'name': 'Report Configurator - Payment Group',
-    'version': '9.0.1.2.0',
+    'name': 'Report Extended Payments Integration',
+    'version': '11.0.1.0.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
-    'description': """
-Report Configurator - Payment Group
-===================================
-    """,
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
@@ -43,9 +39,7 @@ Report Configurator - Payment Group
     ],
     'demo': [
     ],
-    'test': [
-    ],
-    'installable': False,
+    'installable': True,
     'auto_install': True,
     'application': False,
 }

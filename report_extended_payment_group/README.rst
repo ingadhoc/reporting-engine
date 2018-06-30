@@ -10,9 +10,9 @@
    :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
-===============
-Report Extended
-===============
+====================================
+Report Extended Payments Integration
+====================================
 
 TODO
 

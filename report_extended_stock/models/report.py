@@ -5,8 +5,8 @@
 from odoo import models, fields
 
 
-class ir_actions_report(models.Model):
-    _inherit = 'ir.actions.report.xml'
+class IrActionsReport(models.Model):
+    _inherit = 'ir.actions.report'
 
     stock_picking_book_ids = fields.Many2many(
         'stock.book',
@@ -20,11 +20,10 @@ class ir_actions_report(models.Model):
         [('voucher', 'Voucher'), ('picking_list', 'Picking List')],
         'Stock Report Type',)
 
-    def get_domains(self, cr, model, record, context=None):
-        domains = super(ir_actions_report, self).get_domains(
-            cr, model, record, context=context)
-        if model == 'stock.picking':
-            stock_report_type = context.get('stock_report_type', False)
+    def get_domains(self, record):
+        domains = super(IrActionsReport, self).get_domains(record)
+        if record._name == 'stock.picking':
+            stock_report_type = self._context.get('stock_report_type', False)
             if stock_report_type:
                 # Search for especific picking type and report type
                 domains.append([

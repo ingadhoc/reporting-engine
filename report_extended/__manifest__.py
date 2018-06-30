@@ -18,7 +18,7 @@
 #
 ##############################################################################
 {
-    'name': 'Report Configurator',
+    'name': 'Report Extended',
     'version': '11.0.1.0.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
@@ -30,6 +30,9 @@
     ],
     'depends': [
         'base',
+        # there isn't a method that we can use for any reporting engine
+        # so we need to update data dict for aeroo specificaclly
+        'report_aeroo',
     ],
     'data': [
         'views/company_view.xml',
