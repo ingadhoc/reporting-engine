@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (C) 2015  ADHOC SA  (http://www.adhoc.com.ar)
@@ -35,12 +34,11 @@
         'website_sale',
     ],
     'data': [
-        'views/portal_sale_template.xml',
+        'views/sale_order_templates.xml',
     ],
     'demo': [
     ],
-    'installable': False,
-    # TODO make auto install upon release to v11
-    'auto_install': False,
+    'installable': True,
+    'auto_install': True,
     'application': False,
 }
