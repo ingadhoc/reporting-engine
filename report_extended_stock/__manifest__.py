@@ -39,8 +39,7 @@
     ],
     'demo': [
     ],
-    'installable': False,
-    # TODO AUTO INSTALL TRUE
-    'auto_install': False,
+    'installable': True,
+    'auto_install': True,
     'application': False,
 }
