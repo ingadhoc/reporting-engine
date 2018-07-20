@@ -20,9 +20,8 @@ class StockPicking(models.Model):
             active_model=self._name, active_id=self.id, active_ids=self.ids,
             stock_report_type='picking_list')
 
-        report_name = self.env['ir.actions.report'].get_report_name(self)
-        return self.env['ir.actions.report'].search(
-            [('report_name', '=', report_name)], limit=1).report_action(self)
+        return self.env['ir.actions.report'].get_report(self).report_action(
+            self)
 
     @api.multi
     def do_print_voucher(self):
@@ -35,10 +34,8 @@ class StockPicking(models.Model):
             active_model=self._name, active_id=self.id, active_ids=self.ids,
             stock_report_type='voucher')
 
-        report_name = self.env['ir.actions.report'].get_report_name(self)
-        report = self.env['ir.actions.report'].search(
-            [('report_name', '=', report_name)], limit=1).report_action(self)
-        return report
+        return self.env['ir.actions.report'].get_report(self).report_action(
+            self)
 
     @api.multi
     @api.constrains('sale_id')

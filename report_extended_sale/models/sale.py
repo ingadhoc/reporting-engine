@@ -11,11 +11,11 @@ class SaleOrder(models.Model):
     internal_notes = fields.Text('Internal Notes')
 
     @api.multi
-    def get_report_name(self):
+    def get_report(self):
         """
         Para ser usado tmb, por ejemplo, desde qweb en website_portal
         """
-        return self.env['ir.actions.report'].get_report_name(self)
+        return self.env['ir.actions.report'].get_report(self)
 
     @api.multi
     def print_quotation(self):
@@ -26,9 +26,7 @@ class SaleOrder(models.Model):
         self = self.with_context(
             active_model=self._name, active_id=self.id, active_ids=self.ids)
 
-        report_name = self.get_report_name()
-        return self.env['ir.actions.report'].search(
-            [('report_name', '=', report_name)], limit=1).report_action(self)
+        return self.get_report().report_action(self)
 
     @api.multi
     def _prepare_invoice(self):

@@ -1,0 +1,9 @@
+<odoo>
+    <!-- hacemos que se imprima reporte correcto desde facturas en portal -->
+    <template id="portal_invoice_page" inherit_id="account.portal_invoice_page" name="Invoice Portal Template">
+        <!-- si es reporte de aeroo adaptamos url -->
+        <a t-att-href="'/my/invoices/pdf/%s?%s' % (invoice.id, keep_query())" position="attributes">
+            <attribute name="t-att-href">invoice.get_report().report_type == 'aeroo' and '/report/aeroo/%s/%s' % (invoice.get_report().report_name, str(invoice.id)) or '/my/invoices/pdf/%s?%s' % (invoice.id, keep_query())</attribute>
+        </a>
+    </template>
+</odoo>

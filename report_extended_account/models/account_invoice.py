@@ -27,11 +27,10 @@ class AccountInvoice(models.Model):
     )
 
     @api.multi
-    def get_report_name(self):
+    def get_report(self):
+        """Para ser usado tmb, por ejemplo, desde qweb en website_portal
         """
-        Para ser usado tmb, por ejemplo, desde qweb en website_portal
-        """
-        return self.env['ir.actions.report'].get_report_name(self)
+        return self.env['ir.actions.report'].get_report(self)
 
     @api.multi
     def invoice_print(self):
@@ -44,7 +43,7 @@ class AccountInvoice(models.Model):
         # is wrong and it raise an error with custom filename
         self = self.with_context(
             active_model=self._name, active_id=self.id, active_ids=self.ids)
-        report_name = self.get_report_name()
+        report_name = self.get_report().report_name
         return self.env['ir.actions.report'].search(
             [('report_name', '=', report_name)], limit=1).report_action(self)
 
