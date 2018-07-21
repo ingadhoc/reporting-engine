@@ -46,11 +46,6 @@ class IrActionsReport(models.Model):
     )
 
     @api.model
-    def get_report_name(self, records):
-        report = self.get_report(records)
-        return report.report_name
-
-    @api.model
     def get_report(self, records):
         domains = self.get_domains(records[0])
 

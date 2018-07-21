@@ -35,6 +35,7 @@
     'data': [
         'views/report_view.xml',
         'views/sale_order_view.xml',
+        'views/sale_portal_templates.xml',
         # 'views/company_view.xml'
     ],
     'demo': [

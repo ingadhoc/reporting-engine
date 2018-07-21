@@ -34,7 +34,6 @@
         'website_sale',
     ],
     'data': [
-        'views/sale_order_templates.xml',
     ],
     'demo': [
     ],

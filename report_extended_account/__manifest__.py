@@ -39,6 +39,7 @@
         'views/report_payment_view.xml',
         'views/account_payment_view.xml',
         'views/account_invoice_view.xml',
+        'views/account_portal_templates.xml',
     ],
     'demo': [
     ],

@@ -20,9 +20,8 @@ class PurchaseOrder(models.Model):
         self = self.with_context(
             active_model=self._name, active_id=self.id, active_ids=self.ids)
 
-        report_name = self.env['ir.actions.report'].get_report_name(self)
-        return self.env['ir.actions.report'].search(
-            [('report_name', '=', report_name)], limit=1).report_action(self)
+        return self.env['ir.actions.report'].get_report(self).report_action(
+            self)
 
     @api.model
     def _prepare_picking(self):
