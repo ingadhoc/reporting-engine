@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Report Extended Account Integration',
-    'version': '11.0.1.0.0',
+    'version': '11.0.1.1.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -39,7 +39,6 @@
         'views/report_payment_view.xml',
         'views/account_payment_view.xml',
         'views/account_invoice_view.xml',
-        'views/account_portal_templates.xml',
     ],
     'demo': [
     ],

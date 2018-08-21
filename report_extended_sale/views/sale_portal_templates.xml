@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<odoo>
-    <template id="portal_order_page" inherit_id="sale.portal_order_page">
-        <a t-att-href="'/my/orders/pdf/%s?%s' % (order.id, keep_query())" position="attributes">
-            <attribute name="t-att-href">order.get_report().report_type == 'aeroo' and '/report/aeroo/%s/%s' % (order.get_report().report_name, str(order.id)) or '/my/orders/pdf/%s?%s' % (order.id, keep_query())</attribute>
-        </a>
-    </template>
-</odoo>
