@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Report Extended Sale Integration',
-    'version': '11.0.1.0.0',
+    'version': '11.0.1.1.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -35,7 +35,6 @@
     'data': [
         'views/report_view.xml',
         'views/sale_order_view.xml',
-        'views/sale_portal_templates.xml',
         # 'views/company_view.xml'
     ],
     'demo': [
