@@ -4,17 +4,19 @@
 ##############################################################################
 from odoo import models, api, _, SUPERUSER_ID
 from odoo.exceptions import RedirectWarning, Warning
-import werkzeug.urls
-import urllib2
+from urllib.error import HTTPError
+import urllib.request
+import urllib.parse
+import requests
 import logging
 import json
 import time
 import base64
 import mimetypes
-import mimetools
+import email.generator
 
 # from https://developers.google.com/cloud-print/docs/pythonCode
-BOUNDARY = mimetools.choose_boundary()
+BOUNDARY = email.generator._make_boundary()
 CRLF = '\r\n'
 CLOUDPRINT_URL = 'https://www.google.com/cloudprint'
 
@@ -61,18 +63,18 @@ class GoogleCloudprintConfig(models.Model):
             'google_cloudprint_client_secret')
 
         # For Getting New Access Token With help of old Refresh Token
-        data = werkzeug.url_encode({
+        data = urllib.parse.urlencode({
             'client_id': google_cloudprint_client_id,
             'refresh_token': google_cloudprint_refresh_token,
             'client_secret': google_cloudprint_client_secret,
             'grant_type': "refresh_token",
             'scope': scope or 'https://www.googleapis.com/auth/cloudprint'
-        })
+        }).encode("utf-8")
         headers = {"Content-type": "application/x-www-form-urlencoded"}
         try:
-            req = urllib2.Request(GOOGLE_TOKEN_ENDPOINT, data, headers)
-            content = urllib2.urlopen(req, timeout=TIMEOUT).read()
-        except urllib2.HTTPError:
+            req = urllib.request.Request(GOOGLE_TOKEN_ENDPOINT, data, headers)
+            content = urllib.request.urlopen(req, timeout=TIMEOUT).read()
+        except HTTPError:
             if user_is_admin:
                 dummy, action_id = self.env[
                     'ir.model.data'].get_object_reference(
@@ -86,7 +88,7 @@ class GoogleCloudprintConfig(models.Model):
                 raise Warning(_(
                     "Google Drive is not yet configured. "
                     "Please contact your administrator."))
-        content = json.loads(content)
+        content = json.loads(content.decode('utf-8'))
         return content.get('access_token')
 
     @api.model
@@ -95,22 +97,22 @@ class GoogleCloudprintConfig(models.Model):
         request_url = "%s/%s" % (CLOUDPRINT_URL, interface)
         if params:
             request_url += "?%s" % (
-                werkzeug.url_encode(params))
+                urllib.parse.urlencode(params).encode("utf-8"))
         headers = {
             "Authorization": 'Bearer ' + access_token,
         }
-        data_json = json.dumps(data)
+        data_json = data and json.dumps(data.encode('utf-8')) or None
         # _logger.info('Running GCP request with url %s' % request_url)
         try:
-            req = urllib2.Request(request_url, data_json, headers)
-            response = urllib2.urlopen(req, timeout=TIMEOUT).read()
-        except urllib2.HTTPError:
+            req = urllib.request.Request(request_url, data_json, headers)
+            response = urllib.request.urlopen(req, timeout=TIMEOUT).read()
+        except HTTPError:
             raise Warning(_(
                 "Could not connect to google cloud print. "
                 "Check your configuration"))
         # _logger.info('Google Cloud Print response for %s\n%s' % (
         #     interface, response))
-        return json.loads(response)
+        return json.loads(response.decode('utf-8'))
 
     @api.model
     def get_printers(self, user=None):
@@ -134,72 +136,53 @@ class GoogleCloudprintConfig(models.Model):
         Returns:
             boolean: True = submitted, False = errors.
         """
-
         # TODO implementar options
         if jobtype in ['qweb-pdf', 'pdf', 'aeroo']:
             jobtype = 'pdf'
-        if jobtype == 'pdf':
+        if jobtype in ['pdf', 'png', 'jpeg']:
             b64file = self.Base64Encode(jobsrc)
-            fdata = self.ReadFile(b64file)
-        elif jobtype in ['png', 'jpeg']:
-            b64file = self.Base64Encode(jobsrc)
-            fdata = self.ReadFile(b64file)
         else:
             raise Warning(_(
-                'Jobtype %s not implemented for google cloud printin') % (
+                'Jobtype %s not implemented for google cloud printing') % (
                 jobtype))
-
-        access_token = self.get_access_token()
 
         # Make the title unique for each job, since the printer by default will
         # name the print job file the same as the title.
         datehour = time.strftime('%b%d%H%M', time.localtime())
         title = '%s%s' % (datehour, jobsrc)
-
-        # """The following dictionaries expect a certain kind of data in
-        # jobsrc, depending on jobtype:
-        #    jobtype               jobsrc
-        #    ======================================
-        #    pdf                    pathname to the pdf file
-        #    png                    pathname to the png file
-        #    jpeg                   pathname to the jpeg file
-        #    =======================================
-        # """
-
         request_url = "%s/%s" % (CLOUDPRINT_URL, 'submit')
-        request = urllib2.Request(request_url)
-        request.add_header("Authorization", 'Bearer %s' % access_token)
-        content = {
-            'pdf': fdata,
-            'jpeg': jobsrc,
-            'png': jobsrc,
+
+        # TODO K Do we need this?
+        # content_type = {
+        #     'pdf': 'dataUrl',
+        #     'jpeg': 'image/jpeg',
+        #     'png': 'image/png',
+        # }
+
+        session = requests.Session()
+        access_token = self.get_access_token()
+        headers = {
+            "Authorization": 'Bearer %s' % access_token,
         }
-        content_type = {
-            'pdf': 'dataUrl',
-            'jpeg': 'image/jpeg',
-            'png': 'image/png',
-        }
-        headers = [
-            ('printerid', printerid),
-            ('title', title),
-            ('content', content[jobtype]),
-            ('contentType', content_type[jobtype])]
-        files = [('capabilities', 'capabilities', '{"capabilities":[]}')]
-        if jobtype in ['pdf', 'jpeg', 'png']:
-            files.append(('content', jobsrc, fdata))
+        session.post(request_url, headers=headers)
+        data = dict([
+            ("printerid", printerid),
+            ("title", title),
+            ("contentType", 'dataUrl'),
+            ('capabilities', ('capabilities', '{"capabilities":[]}',
+                              'dataUrl')),
+        ])
+        files = [
+            ('content', (None, open(b64file, 'rb'))),
+            ('content', (jobsrc, open(b64file, 'rb'), 'dataUrl')),
+        ]
+        response = session.post(
+            request_url,
+            data=data,
+            files=files,
+            headers=headers,
+        )
 
-        data = self.EncodeMultiPart(
-            headers, files, file_type=content_type[jobtype])
-
-        request.add_header('Content-Length', str(len(data)))
-        # parecen no necesarios
-        # request.add_header('X-CloudPrint-Proxy', 'api-prober')
-        # request.add_header('Host', 'www.google.com')
-        request.add_data(data)
-        request.add_header(
-            'Content-Type', 'multipart/form-data;boundary=%s' % BOUNDARY)
-
-        response = urllib2.urlopen(request).read()
         status = self.Validate(response)
         if not status:
             error_msg = self.GetMessage(response)
@@ -207,11 +190,12 @@ class GoogleCloudprintConfig(models.Model):
                 'Print job %s failed with %s', jobtype, error_msg))
         return status
 
-# methods from https://developers.google.com/cloud-print/docs/pythonCode
+    # methods adapted from
+    # https://developers.google.com/cloud-print/docs/pythonCode
     @api.model
     def Validate(self, response):
         """Determine if JSON response indicated success."""
-        if response.find('"success": true') > 0:
+        if response.content.find(b'"success": true') > 0:
             return True
         else:
             return False
@@ -225,42 +209,12 @@ class GoogleCloudprintConfig(models.Model):
         Returns:
             string: message content in json response.
         """
-        lines = response.split('\n')
+        lines = response.content.split('\n')
         for line in lines:
             if '"message":' in line:
                 msg = line.split(':')
                 return msg[1]
         return None
-
-    @api.model
-    def EncodeMultiPart(self, fields, files, file_type='application/xml'):
-        """Encodes list of parameters and files for HTTP multipart format.
-
-        Args:
-          fields: list of tuples containing name and value of parameters.
-          files: list of tuples containing param name, filename, and file
-                contents.
-          file_type: string if file type different than application/xml.
-        Returns:
-          A string to be sent as data for the HTTP post request.
-        """
-        lines = []
-        for (key, value) in fields:
-            lines.append('--' + BOUNDARY)
-            lines.append('Content-Disposition: form-data; name="%s"' % key)
-            lines.append('')  # blank line
-            lines.append(value)
-        for (key, filename, value) in files:
-            lines.append('--' + BOUNDARY)
-            lines.append(
-                'Content-Disposition: form-data; name="%s"; filename="%s"'
-                % (key, filename))
-            lines.append('Content-Type: %s' % file_type)
-            lines.append('')  # blank line
-            lines.append(value)
-        lines.append('--' + BOUNDARY + '--')
-        lines.append('')  # blank line
-        return CRLF.join(lines)
 
     @api.model
     def Base64Encode(self, pathname):
@@ -280,7 +234,7 @@ class GoogleCloudprintConfig(models.Model):
         # Convert binary data to base64 encoded data.
         # file_type = 'application/pdf'
         header = 'data:%s;base64,' % file_type
-        b64data = header + base64.b64encode(data)
+        b64data = bytes(header, 'utf-8') + base64.b64encode(data)
 
         if self.WriteFile(b64_pathname, b64data):
             return b64_pathname
@@ -299,13 +253,13 @@ class GoogleCloudprintConfig(models.Model):
             f = open(pathname, 'rb')
             try:
                 s = f.read()
-            except IOError, e:
-                _logger.info('Error reading %s\n%s', pathname, e)
+            except IOError as error:
+                _logger.info('Error reading %s\n%s', pathname, error)
             finally:
                 f.close()
                 return s
-        except IOError, e:
-            _logger.error('Error opening %s\n%s', pathname, e)
+        except IOError as error:
+            _logger.error('Error opening %s\n%s', pathname, error)
             return None
 
     @api.model
@@ -323,12 +277,12 @@ class GoogleCloudprintConfig(models.Model):
             f = open(file_name, 'wb')
             try:
                 f.write(data)
-            except IOError, e:
-                # logger.error('Error writing %s\n%s', file_name, e)
+            except IOError as error:
+                # logger.error('Error writing %s\n%s', file_name, error)
                 status = False
             finally:
                 f.close()
-        except IOError, e:
-            _logger.error('Error opening %s\n%s', file_name, e)
+        except IOError as error:
+            _logger.error('Error opening %s\n%s', file_name, error)
             status = False
         return status

@@ -19,6 +19,7 @@
 ##############################################################################
 {
     'name': "Google Cloud Printer",
+    "version": '11.0.1.0.0',
     'category': 'Generic Modules/Base',
     'author': 'ADHOC SA',
     'license': 'AGPL-3',
@@ -32,12 +33,13 @@
     ],
     "data": [
         'views/res_users_view.xml',
-        'res_config_view.xml',
-        'gcp_data.xml',
-        'wizard/update_printers.xml',
+        'views/printing_printer_view.xml',
+        'wizards/res_config_settings_view.xml',
+        'data/ir_config_parameter_data.xml',
+        'data/printing_server_data.xml',
+        'wizards/printing_printer_update_wizard.xml',
         'security/ir.model.access.csv',
+        'security/google_cloud_print_security.xml',
     ],
-    "demo": [],
-    'installable': False,
-    "version": '9.0.1.0.0',
+    'installable': True,
 }

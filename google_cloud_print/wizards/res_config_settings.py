@@ -3,13 +3,11 @@
 # directory
 ##############################################################################
 from odoo import models, fields, api
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
-class base_config_settings(models.TransientModel):
-    _inherit = "base.config.settings"
+class ResConfigSettings(models.TransientModel):
+
+    _inherit = 'res.config.settings'
 
     @api.model
     def _default_google_cloudprint_authorization_code(self):
@@ -18,12 +16,12 @@ class base_config_settings(models.TransientModel):
 
     google_cloudprint_authorization_code = fields.Char(
         string='Authorization Code',
-        default=_default_google_cloudprint_authorization_code
+        default=_default_google_cloudprint_authorization_code,
     )
     google_cloudprint_uri = fields.Char(
         compute='_compute_cloudprint_uri',
         string='URI',
-        help="The URL to generate the authorization code from Google"
+        help="The URL to generate the authorization code from Google",
     )
 
     def get_google_cloudprint_scope(self):
@@ -41,8 +39,8 @@ class base_config_settings(models.TransientModel):
             config.google_cloudprint_uri = google_cloudprint_uri
 
     @api.multi
-    def set_google_cloudprint_authorization_code(self):
-        self.ensure_one()
+    def set_values(self):
+        super(ResConfigSettings, self).set_values()
         ICP = self.env['ir.config_parameter'].sudo()
         authorization_code = self.google_cloudprint_authorization_code
         if authorization_code and authorization_code != ICP.get_param(

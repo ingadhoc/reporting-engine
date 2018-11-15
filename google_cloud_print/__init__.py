@@ -3,5 +3,4 @@
 # directory
 ##############################################################################
 from . import models
-from . import wizard
-from . import res_config
+from . import wizards

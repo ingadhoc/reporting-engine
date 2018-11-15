@@ -3,9 +3,6 @@
 # directory
 ##############################################################################
 from odoo import models, api, fields
-# from odoo.exceptions import Warning
-import logging
-_logger = logging.getLogger(__name__)
 
 
 class PrintingPrinterUpdateWizard(models.TransientModel):

@@ -11,6 +11,7 @@ _logger = logging.getLogger(__name__)
 
 
 class PrintingPrinter(models.Model):
+
     _inherit = "printing.printer"
 
     gc_user_id = fields.Many2one(
@@ -37,6 +38,8 @@ class PrintingPrinter(models.Model):
 
     @api.model
     def update_gc_printers(self, user=None):
+        gc_server = self.env.ref(
+            'google_cloud_print.printing_server_cloudprint')
         _logger.info('Updating Google Cloud Printers')
         gcprinters = self.env['google.cloudprint.config'].get_printers(user)
         for gcprinter in gcprinters:
@@ -58,19 +61,19 @@ class PrintingPrinter(models.Model):
                         gcprinter.get('connectionStatus', False)),
                     'gc_user_id': user and user.id or False,
                     'status_message': gcprinter.get('connectionStatus', False),
+                    'server_id': gc_server.id,
                 })
         return True
 
     @api.model
     def update_printers_status(self):
-        res = super(PrintingPrinter, self).update_printers_status()
         # update generics printers
         self.update_gc_printers_status()
         # update users printers
         self.env['res.users'].search([
             ('google_cloudprint_rtoken', '!=', False)
         ]).update_user_gc_printers_status()
-        return res
+        return True
 
     @api.model
     def get_gc_printer_status(self, connectionStatus):
@@ -99,7 +102,7 @@ class PrintingPrinter(models.Model):
                 printer.write(vals)
 
     @api.multi
-    def print_document(self, report, content, format, copies=1):
+    def print_document(self, report, content, **print_opts):
         """ Print a file
 
         Format could be pdf, qweb-pdf, raw, ...
@@ -110,11 +113,11 @@ class PrintingPrinter(models.Model):
                 'Google cloud print called with %s but singleton is'
                 'expeted. Check printers configuration.' % self)
             return super(PrintingPrinter, self).print_document(
-                report, content, format, copies=copies)
+                report, content, **print_opts)
         # self.ensure_one()
         if self.printer_type != 'gcp':
             return super(PrintingPrinter, self).print_document(
-                report, content, format, copies=copies)
+                report, content, **print_opts)
         if get_mode():
             _logger.warning(_(
                 "You Can not Send Mail Because Odoo is not in Production "
@@ -127,7 +130,7 @@ class PrintingPrinter(models.Model):
         finally:
             os.close(fd)
 
-        options = self.print_options(report, format, copies)
+        options = self.print_options(report, **print_opts)
 
         _logger.debug(
             'Sending job to Google Cloud printer %s' % (self.system_name))
@@ -137,15 +140,26 @@ class PrintingPrinter(models.Model):
         try:
             self.env['google.cloudprint.config'].submit_job(
                 self.uri,
-                format,
+                options.get('format', 'pdf'),
                 file_name,
                 options,
             )
+            _logger.info("Printing job: '%s'" % (file_name))
         except Exception as e:
             # access_token = self.get_access_token()
             _logger.error(
                 'Could not submit job to google cloud. This is what we get:\n'
                 '%s' % e)
 
-        _logger.info("Printing job: '%s'" % (file_name))
+        return True
+
+    @api.multi
+    def enable(self):
+        gc_server = self.env.ref(
+            'google_cloud_print.printing_server_cloudprint')
+        for printer in self:
+            if printer.server_id == gc_server:
+                printer.update_printers_status()
+            else:
+                super(PrintingPrinter, self).enable()
         return True
