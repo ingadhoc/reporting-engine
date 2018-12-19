@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+    <record id="printing_server_cloudprint" model="printing.server">
+        <field name="name">Google Cloud Print</field>
+        <field name="address">https://www.google.com/cloudprint</field>
+    </record>
+
+</odoo>

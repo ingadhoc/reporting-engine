@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="printing_printer_view_form" model="ir.ui.view">
+        <field name="name">printing.printer.form</field>
+        <field name="model">printing.printer</field>
+        <field name="inherit_id" ref="base_report_to_printer.printing_printer_view_form"/>
+        <field name="arch" type="xml">
+            <group name="details" position="inside">
+                <field name="printer_type" invisible="1"/>
+            </group>
+            <button name="enable" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('status', 'in', ('available', 'printing')), ('printer_type', '=', 'gcp')]}</attribute>
+            </button>
+            <button name="disable" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('status', '=', 'unavailable'), ('printer_type', '=', 'gcp')]}</attribute>
+            </button>
+            <button name="action_cancel_all_jobs" position="attributes">
+                <attribute name="attrs">{'invisible': [('printer_type', '=', 'gcp')]}</attribute>
+            </button>
+            <group name="jobs" position="attributes">
+                <attribute name="attrs">{'invisible': [('printer_type', '=', 'gcp')]}</attribute>
+            </group>
+            <group name="trays" position="attributes">
+                <attribute name="attrs">{'invisible': [('printer_type', '=', 'gcp')]}</attribute>
+            </group>
+        </field>
+    </record>
+
+</odoo>

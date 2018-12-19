@@ -1,0 +1,19 @@
+<odoo>
+    <!-- remove from cups from menu name -->
+    <record id="base_report_to_printer.menu_printer_update_wizard" model="ir.ui.menu">
+        <field name="name">Update Printers</field>
+    </record>
+
+    <record id="printer_update_wizard" model="ir.ui.view">
+        <field name="name">printing.printer.update.wizard</field>
+        <field name="model">printing.printer.update.wizard</field>
+        <field name="inherit_id" ref="base_report_to_printer.printer_update_wizard"/>
+        <field name="arch" type="xml">
+            <label position="after">
+                <group>
+                    <field name="printer_type"/>
+                </group>
+            </label>
+        </field>
+    </record>
+</odoo>
