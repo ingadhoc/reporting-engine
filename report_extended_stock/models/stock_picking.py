@@ -48,4 +48,4 @@ class StockPicking(models.Model):
                 vals['note'] = rec.sale_id.internal_notes
             if rec.sale_id.note:
                 vals['observations'] = rec.sale_id.note
-            rec.update(vals)
+            rec.write(vals)
