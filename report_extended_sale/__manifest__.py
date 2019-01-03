@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Report Extended Sale Integration',
-    'version': '11.0.1.1.0',
+    'version': '11.0.1.2.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -30,11 +30,15 @@
     ],
     'depends': [
         'report_extended',
-        'sale',
+        # 'sale',
+        # TODO dejamos esta dependencia hasta que movamos cierta funcionalidad
+        # a un sale_document
+        'l10n_ar_sale',
     ],
     'data': [
         'views/report_view.xml',
         'views/sale_order_view.xml',
+        'views/sale_checkbook_views.xml',
         # 'views/company_view.xml'
     ],
     'demo': [

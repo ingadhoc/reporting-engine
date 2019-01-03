@@ -3,4 +3,5 @@
 # directory
 ##############################################################################
 from . import stock_picking
+from . import stock_book
 from . import report

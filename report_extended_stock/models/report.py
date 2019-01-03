@@ -2,7 +2,7 @@
 # For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class IrActionsReport(models.Model):
@@ -56,3 +56,22 @@ class IrActionsReport(models.Model):
             # Search without picking_type
             domains.append([('stock_report_type', '=', False)])
         return domains
+
+    @api.multi
+    def _extend_report_context(self, docids, data=None):
+        self = super(
+            IrActionsReport, self)._extend_report_context(
+            docids, data=data)
+
+        if self._context.get('active_model') == 'stock.picking' and\
+                'active_id' in self._context:
+            active_object = self.env[self._context['active_model']].browse(
+                self._context['active_id'])
+            report_partner = active_object.book_id.report_partner_id
+            if report_partner:
+                temp_company = self.env['res.company'].new(
+                    {'partner_id': report_partner.id})
+                self = self.with_context(company=temp_company)
+                if self.print_logo == 'company_logo':
+                    self = self.with_context(logo_report=report_partner.image)
+        return self

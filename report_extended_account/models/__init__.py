@@ -3,6 +3,7 @@
 # directory
 ##############################################################################
 from . import account_invoice
+from . import account_journal
 from . import account_payment
 from . import report_invoice
 from . import report_payment

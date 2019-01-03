@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_sale_checkbook_search" model="ir.ui.view">
+        <field name="name">sale.checkbook.search</field>
+        <field name="model">sale.checkbook</field>
+        <field name="inherit_id" ref="l10n_ar_sale.view_sale_checkbook_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="report_partner_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_sale_checkbook_tree" model="ir.ui.view">
+        <field name="name">sale.checkbook.tree</field>
+        <field name="model">sale.checkbook</field>
+        <field name="inherit_id" ref="l10n_ar_sale.view_sale_checkbook_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="report_partner_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_sale_checkbook_form" model="ir.ui.view">
+        <field name="name">sale.checkbook.form</field>
+        <field name="model">sale.checkbook</field>
+        <field name="inherit_id" ref="l10n_ar_sale.view_sale_checkbook_form"/>
+        <field name="arch" type="xml">
+            <field name="discriminate_taxes" position="after">
+                <field name="report_partner_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
