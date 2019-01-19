@@ -4,13 +4,15 @@
 # 
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2018
+# Katherine Zaoral <katherine.zaoral@gmail.com>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-23 20:10+0000\n"
-"PO-Revision-Date: 2018-08-23 20:10+0000\n"
-"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2018\n"
+"POT-Creation-Date: 2019-01-03 19:43+0000\n"
+"PO-Revision-Date: 2018-08-23 20:11+0000\n"
+"Last-Translator: Katherine Zaoral <katherine.zaoral@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,6 +57,11 @@ msgid "Quotation"
 msgstr "Presupuesto"
 
 #. module: report_extended_sale
+#: model:ir.model.fields,field_description:report_extended_sale.field_sale_checkbook_report_partner_id
+msgid "Report Partner"
+msgstr "Contacto para encabezado de reporte"
+
+#. module: report_extended_sale
 #: model:ir.ui.view,arch_db:report_extended_sale.act_report_extended_xml_view
 msgid "Sale Order Information"
 msgstr "Información de Pedido de venta"
@@ -67,9 +74,14 @@ msgstr "Estado de Pedido de venta"
 #. module: report_extended_sale
 #: model:ir.model,name:report_extended_sale.model_sale_advance_payment_inv
 msgid "Sales Advance Payment Invoice"
-msgstr ""
+msgstr "Sales Advance Payment Invoice"
 
 #. module: report_extended_sale
 #: model:ir.model,name:report_extended_sale.model_ir_actions_report
 msgid "ir.actions.report"
-msgstr ""
+msgstr "ir.actions.report"
+
+#. module: report_extended_sale
+#: model:ir.model,name:report_extended_sale.model_sale_checkbook
+msgid "sale.checkbook"
+msgstr "sale.checkbook"
