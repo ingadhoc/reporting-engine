@@ -5,6 +5,7 @@
 from odoo import fields, models, api, _
 from tempfile import mkstemp
 from odoo.addons.server_mode.mode import get_mode
+from ast import literal_eval
 import os
 import logging
 _logger = logging.getLogger(__name__)
@@ -118,7 +119,9 @@ class PrintingPrinter(models.Model):
         if self.printer_type != 'gcp':
             return super(PrintingPrinter, self).print_document(
                 report, content, **print_opts)
-        if get_mode():
+        test_enable = literal_eval(self.env['ir.config_parameter'].get_param(
+            'google_cloudprint_enable_print_test', default='False'))
+        if get_mode() and not test_enable:
             _logger.warning(_(
                 "You Can not Send Mail Because Odoo is not in Production "
                 "mode"))

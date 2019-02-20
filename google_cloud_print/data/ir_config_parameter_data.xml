@@ -12,4 +12,9 @@
         <field name="value">vTmou73c-njP-1qCxm7qx7QE</field>
     </record>
 
+    <record id="google_cloudprint_enable_print_test" model="ir.config_parameter">
+        <field name="key">google_cloudprint_enable_print_test</field>
+        <field name="value">False</field>
+    </record>
+
 </odoo>

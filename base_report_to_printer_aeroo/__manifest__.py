@@ -1,6 +1,6 @@
 ##############################################################################
 #
-#    Copyright (C) 2016  ADHOC SA  (http://www.adhoc.com.ar)
+#    Copyright (C) 2019  ADHOC SA  (http://www.adhoc.com.ar)
 #    All Rights Reserved.
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,28 +18,20 @@
 #
 ##############################################################################
 {
-    'name': "Google Cloud Printer",
-    "version": '11.0.1.1.0',
-    'category': 'Generic Modules/Base',
+    'name': 'Report to print Aeroo',
+    'version': '11.0.1.0.0',
+    'category': 'Reporting Subsystem',
+    'sequence': 14,
     'author': 'ADHOC SA',
+    'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
-    "depends": [
+    'depends': [
+        'report_aeroo',
         'base_report_to_printer',
-        'google_account',
-        'server_mode',
-        # to improove user experience
-        # 'web_widget_one2many_tags',
-        # 'web_ir_actions_act_window_none',
     ],
-    "data": [
-        'views/res_users_view.xml',
-        'views/printing_printer_view.xml',
-        'wizards/res_config_settings_view.xml',
-        'data/ir_config_parameter_data.xml',
-        'data/printing_server_data.xml',
-        'wizards/printing_printer_update_wizard.xml',
-        'security/ir.model.access.csv',
-        'security/google_cloud_print_security.xml',
+    'data': [
+        'views/assets.xml',
     ],
     'installable': True,
+    'auto_install': True,
 }
