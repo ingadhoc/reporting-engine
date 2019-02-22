@@ -31,9 +31,13 @@ class SaleOrder(models.Model):
     @api.multi
     def _prepare_invoice(self):
         vals = super(SaleOrder, self)._prepare_invoice()
-        if self.company_id.internal_notes:
+        propagate_internal_notes = self.env['ir.config_parameter'].sudo(
+        ).get_param('sale.propagate_internal_notes') == 'True'
+        propagate_note = self.env['ir.config_parameter'].sudo(
+        ).get_param('sale.propagate_note') == 'True'
+        if propagate_internal_notes and self.internal_notes:
             vals.update({
                 'internal_notes': self.internal_notes})
-        if 'comment' in vals and not self.company_id.external_notes:
+        if 'comment' in vals and not propagate_note:
             vals.pop('comment')
         return vals

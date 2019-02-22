@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Report Extended Sale Integration',
-    'version': '11.0.1.2.0',
+    'version': '11.0.1.3.0',
     'category': 'Reporting Subsystem',
     'sequence': 14,
     'summary': '',
@@ -36,10 +36,11 @@
         'l10n_ar_sale',
     ],
     'data': [
+        'data/ir_config_parameter_data.xml',
         'views/report_view.xml',
         'views/sale_order_view.xml',
         'views/sale_checkbook_views.xml',
-        # 'views/company_view.xml'
+        'wizards/res_config_settings_views.xml',
     ],
     'demo': [
     ],
