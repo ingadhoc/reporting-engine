@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-03 19:43+0000\n"
+"POT-Creation-Date: 2019-02-22 17:54+0000\n"
 "PO-Revision-Date: 2018-08-23 20:11+0000\n"
 "Last-Translator: Katherine Zaoral <katherine.zaoral@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
@@ -19,11 +19,6 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. module: report_extended_sale
-#: model:ir.model,name:report_extended_sale.model_res_company
-msgid "Companies"
-msgstr "Compañías"
 
 #. module: report_extended_sale
 #: selection:ir.actions.report,sale_order_state:0
@@ -41,14 +36,14 @@ msgid "Internal Notes..."
 msgstr "Notas Internas..."
 
 #. module: report_extended_sale
-#: model:ir.model.fields,field_description:report_extended_sale.field_res_company_external_notes
-msgid "Move External Notes"
-msgstr "Mover Notas Externas"
+#: model:ir.model.fields,field_description:report_extended_sale.field_res_config_settings_move_internal_notes
+msgid "Mover notas internas a transferencias de stock y facturas"
+msgstr ""
 
 #. module: report_extended_sale
-#: model:ir.model.fields,field_description:report_extended_sale.field_res_company_internal_notes
-msgid "Move Internal Notes"
-msgstr "Mover Notas Internas"
+#: model:ir.model.fields,field_description:report_extended_sale.field_res_config_settings_move_note
+msgid "Mover términos y condiciones a transferencias de stock y facturas"
+msgstr ""
 
 #. module: report_extended_sale
 #: selection:ir.actions.report,sale_order_state:0
@@ -77,9 +72,30 @@ msgid "Sales Advance Payment Invoice"
 msgstr "Sales Advance Payment Invoice"
 
 #. module: report_extended_sale
+#: model:ir.ui.view,arch_db:report_extended_sale.res_config_settings_view_form_sale
+msgid ""
+"Si marca esta opción y hay un valor definido en \"términos y condiciones\", "
+"el mismo se va a copiar en las facturas o transferencias que se generen "
+"desde esta venta."
+msgstr ""
+
+#. module: report_extended_sale
+#: model:ir.ui.view,arch_db:report_extended_sale.res_config_settings_view_form_sale
+msgid ""
+"Si marca esta opción y hay un valor definido en las \"notas internas\", el "
+"mismo se va a copiar en las facturas o transferencias que se generen desde "
+"esta venta."
+msgstr ""
+
+#. module: report_extended_sale
 #: model:ir.model,name:report_extended_sale.model_ir_actions_report
 msgid "ir.actions.report"
 msgstr "ir.actions.report"
+
+#. module: report_extended_sale
+#: model:ir.model,name:report_extended_sale.model_res_config_settings
+msgid "res.config.settings"
+msgstr "res.config.settings"
 
 #. module: report_extended_sale
 #: model:ir.model,name:report_extended_sale.model_sale_checkbook
