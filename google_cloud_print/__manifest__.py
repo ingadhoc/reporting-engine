@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': "Google Cloud Printer",
-    "version": '11.0.1.2.0',
+    "version": '11.0.1.2.1',
     'category': 'Generic Modules/Base',
     'author': 'ADHOC SA',
     'license': 'AGPL-3',

@@ -119,7 +119,8 @@ class PrintingPrinter(models.Model):
         if self.printer_type != 'gcp':
             return super(PrintingPrinter, self).print_document(
                 report, content, **print_opts)
-        test_enable = literal_eval(self.env['ir.config_parameter'].get_param(
+        test_enable = literal_eval(
+            self.env['ir.config_parameter'].sudo().get_param(
             'google_cloudprint_enable_print_test', default='False'))
         if get_mode() and not test_enable:
             _logger.warning(_(
