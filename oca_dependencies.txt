@@ -5,4 +5,4 @@ ingadhoc-payment https://github.com/ingadhoc/account-payment.git
 odoo-support https://github.com/ingadhoc/odoo-support.git
 oca-report-print-send https://github.com/OCA/report-print-send.git
 ingadhoc-aeroo_reports https://github.com/ingadhoc/aeroo_reports
-ingadhoc-argentina_sale https://github.com/ingadhoc/argentina-sale
+ingadhoc-argentina-sale https://github.com/ingadhoc/argentina-sale
