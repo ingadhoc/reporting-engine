@@ -122,13 +122,11 @@ class IrActionsReport(models.Model):
     @api.multi
     def _extend_report_context(self, docids, data=None):
         company = self.env.user.company_id
-        # if we have company on the active object we prefer it
-        if 'active_model' in self._context and 'active_id' in self._context:
-            active_object = self.env[self._context['active_model']].browse(
-                self._context['active_id'])
-            if hasattr(
-                    active_object, 'company_id') and active_object.company_id:
-                company = active_object.company_id
+        # if we have company on the active object we prefer it (odoo does
+        # similar on web external_layout)
+        recs = self.env.get(self.model).browse(docids)
+        if recs and 'company_id' in recs._fields and recs[0].company_id:
+            company = recs[0].company_id
 
         # We add logo
         print_logo = False
