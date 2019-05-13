@@ -121,7 +121,7 @@ class PrintingPrinter(models.Model):
                 report, content, **print_opts)
         test_enable = literal_eval(
             self.env['ir.config_parameter'].sudo().get_param(
-            'google_cloudprint_enable_print_test', default='False'))
+                'google_cloudprint_enable_print_test', default='False'))
         if get_mode() and not test_enable:
             _logger.warning(_(
                 "You Can not Send Mail Because Odoo is not in Production "

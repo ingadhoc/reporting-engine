@@ -7,6 +7,7 @@ class AccountPaymentGroup(models.Model):
     @api.multi
     def payment_print(self):
         self.ensure_one()
+        self.sent = True
 
         # if we print caming from other model then active id and active model
         # is wrong and it raise an error with custom filename
@@ -33,7 +34,7 @@ class AccountPaymentGroup(models.Model):
             default_use_template=bool(template),
             default_template_id=template and template.id or False,
             default_composition_mode='comment',
-            # mark_invoice_as_sent=True,
+            mark_payment_as_sent=True,
         )
         return {
             'name': _('Compose Email'),

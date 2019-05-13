@@ -25,8 +25,11 @@ odoo.define('base_report_to_printer_aeroo.print', function (require) {
                             model: 'ir.actions.report',
                             method: 'print_document',
                             args: [action_val.id,
-                                   action_val.context.active_ids],
-                            kwargs: {data: action_val.data || {}},
+                                action_val.context.active_ids
+                            ],
+                            kwargs: {
+                                data: action_val.data || {}
+                            },
                             context: action_val.context || {},
                         }).then(function () {
                             self.do_notify(_t('Report'),
