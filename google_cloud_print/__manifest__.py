@@ -41,5 +41,5 @@
         'security/ir.model.access.csv',
         'security/google_cloud_print_security.xml',
     ],
-    'installable': True,
+    'installable': False,
 }
