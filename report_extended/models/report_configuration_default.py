@@ -33,9 +33,9 @@ class ConfigurationDefault(models.Model):
         required=True,
     )
     value_text = fields.Text(
-        'Value',
+        'Value (Text)',
         required=False,
     )
     value_boolean = fields.Boolean(
-        'Value',
+        'Value (Yes/No)',
     )

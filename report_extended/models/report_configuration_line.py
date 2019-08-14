@@ -19,11 +19,11 @@ class ReportConfigurationLine(models.Model):
         required=True,
     )
     value_text = fields.Text(
-        'Value',
+        'Value (Text)',
         required=False,
     )
     value_boolean = fields.Boolean(
-        'Value',
+        'Value (Yes/No)',
         required=False,
     )
     report_id = fields.Many2one(
