@@ -4,15 +4,14 @@
 # 
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019
-# Katherine Zaoral <katherine.zaoral@gmail.com>, 2019
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-23 09:15+0000\n"
-"PO-Revision-Date: 2018-08-23 20:11+0000\n"
-"Last-Translator: Katherine Zaoral <katherine.zaoral@gmail.com>, 2019\n"
+"POT-Creation-Date: 2019-12-26 00:28+0000\n"
+"PO-Revision-Date: 2019-08-14 18:03+0000\n"
+"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -129,7 +128,7 @@ msgid "${object.company_id.name|safe} Receipt ${object.display_name or 'n/a'}"
 msgstr "${object.company_id.name|safe} Recibo ${object.display_name or 'n/a'}"
 
 #. module: report_extended_payment_group
-#: model:ir.ui.view,arch_db:report_extended_payment_group.act_report_extended_payment_group_xml_view
+#: model_terms:ir.ui.view,arch_db:report_extended_payment_group.act_report_extended_payment_group_xml_view
 msgid "Account Payment Group Information"
 msgstr "Información de Grupo de Pago"
 
@@ -139,7 +138,7 @@ msgid "Account payment Receiptbook"
 msgstr "Talonario de recibo de pagos"
 
 #. module: report_extended_payment_group
-#: code:addons/report_extended_payment_group/models/account_payment_group.py:39
+#: code:addons/report_extended_payment_group/models/account_payment_group.py:40
 #, python-format
 msgid "Compose Email"
 msgstr "Componer Email"
@@ -150,7 +149,7 @@ msgid "Customer"
 msgstr "Cliente"
 
 #. module: report_extended_payment_group
-#: model:ir.model.fields,field_description:report_extended_payment_group.field_ir_act_report_xml_partner_type
+#: model:ir.model.fields,field_description:report_extended_payment_group.field_ir_actions_report__partner_type
 msgid "Partner Type"
 msgstr "Tipo de empresa"
 
@@ -160,12 +159,22 @@ msgid "Payment Group"
 msgstr "Grupo de Pago"
 
 #. module: report_extended_payment_group
+#: model:ir.model.fields,field_description:report_extended_payment_group.field_ir_actions_report__receiptbook_ids
+msgid "ReceiptBooks"
+msgstr "Talonario de recibos"
+
+#. module: report_extended_payment_group
 #: model:mail.template,report_name:report_extended_payment_group.email_template_edi_payment_group
 msgid "Receipt_${(object.display_name or '').replace('/','_')}"
 msgstr "Recibo_${(object.display_name or '').replace('/','_')}"
 
 #. module: report_extended_payment_group
-#: model:ir.model.fields,field_description:report_extended_payment_group.field_account_payment_receiptbook_report_partner_id
+#: model:ir.model,name:report_extended_payment_group.model_ir_actions_report
+msgid "Report Action"
+msgstr ""
+
+#. module: report_extended_payment_group
+#: model:ir.model.fields,field_description:report_extended_payment_group.field_account_payment_receiptbook__report_partner_id
 msgid "Report Partner"
 msgstr "Contacto para encabezado de reporte"
 
@@ -173,8 +182,3 @@ msgstr "Contacto para encabezado de reporte"
 #: selection:ir.actions.report,partner_type:0
 msgid "Vendor"
 msgstr "Vendedor"
-
-#. module: report_extended_payment_group
-#: model:ir.model,name:report_extended_payment_group.model_ir_actions_report
-msgid "ir.actions.report"
-msgstr "ir.actions.report"

@@ -3,16 +3,15 @@
 # * report_extended_account
 # 
 # Translators:
-# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2018
-# Katherine Zaoral <katherine.zaoral@gmail.com>, 2019
+# Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-03 19:43+0000\n"
-"PO-Revision-Date: 2018-08-23 20:11+0000\n"
-"Last-Translator: Katherine Zaoral <katherine.zaoral@gmail.com>, 2019\n"
+"POT-Creation-Date: 2019-12-26 00:28+0000\n"
+"PO-Revision-Date: 2019-08-14 18:03+0000\n"
+"Last-Translator: Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/adhoc/teams/46451/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: report_extended_account
-#: model:ir.ui.view,arch_db:report_extended_account.act_report_extended_payment_xml_view
+#: model_terms:ir.ui.view,arch_db:report_extended_account.act_report_extended_payment_xml_view
 msgid "Account Payment Information"
 msgstr "Información de Cuenta de Pago"
 
@@ -37,17 +36,17 @@ msgid "Compose Email"
 msgstr "Componer Email"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_ir_act_report_xml_document_type_ids
+#: model:ir.model.fields,field_description:report_extended_account.field_ir_actions_report__document_type_ids
 msgid "Document Types"
 msgstr "Tipos de Documentos"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_account_invoice_splitted_invoice_id
+#: model:ir.model.fields,field_description:report_extended_account.field_account_invoice__splitted_invoice_id
 msgid "Generated Invoice"
 msgstr "Facturas generadas"
 
 #. module: report_extended_account
-#: model:ir.model.fields,help:report_extended_account.field_ir_act_report_xml_account_invoice_split_invoice
+#: model:ir.model.fields,help:report_extended_account.field_ir_actions_report__account_invoice_split_invoice
 msgid ""
 "If true, when validating the invoice, if it contains more than the specified"
 " number of lines, new invoices will be generated."
@@ -61,12 +60,12 @@ msgid "Inbound"
 msgstr "Entrante"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_account_invoice_internal_notes
+#: model:ir.model.fields,field_description:report_extended_account.field_account_invoice__internal_notes
 msgid "Internal Notes"
 msgstr "Notas Internas"
 
 #. module: report_extended_account
-#: model:ir.ui.view,arch_db:report_extended_account.view_invoice_report_extended_form
+#: model_terms:ir.ui.view,arch_db:report_extended_account.view_invoice_report_extended_form
 msgid "Internal notes.."
 msgstr "Notas internas.."
 
@@ -76,12 +75,12 @@ msgid "Invoice"
 msgstr "Factura"
 
 #. module: report_extended_account
-#: model:ir.ui.view,arch_db:report_extended_account.act_report_extended_invoice_xml_view
+#: model_terms:ir.ui.view,arch_db:report_extended_account.act_report_extended_invoice_xml_view
 msgid "Invoice Information"
 msgstr "Información de factura"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_ir_act_report_xml_account_invoice_state
+#: model:ir.model.fields,field_description:report_extended_account.field_ir_actions_report__account_invoice_state
 msgid "Invoice State"
 msgstr "Estado de la Factura"
 
@@ -91,12 +90,12 @@ msgid "Journal"
 msgstr "Diario"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_ir_act_report_xml_account_invoice_journal_ids
+#: model:ir.model.fields,field_description:report_extended_account.field_ir_actions_report__account_invoice_journal_ids
 msgid "Journals"
 msgstr "Diarios"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_ir_act_report_xml_account_invoice_lines_to_split
+#: model:ir.model.fields,field_description:report_extended_account.field_ir_actions_report__account_invoice_lines_to_split
 msgid "Lines to split"
 msgstr "Líneas a dividir"
 
@@ -106,7 +105,7 @@ msgid "Outbound"
 msgstr "Saliente"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_ir_act_report_xml_payment_type
+#: model:ir.model.fields,field_description:report_extended_account.field_ir_actions_report__payment_type
 msgid "Payment Type"
 msgstr "Tipo de pago"
 
@@ -121,39 +120,39 @@ msgid "Pro-forma"
 msgstr "Pro-forma"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_ir_act_report_xml_receiptbook_ids
+#: model:ir.model.fields,field_description:report_extended_account.field_ir_actions_report__receiptbook_ids
 msgid "ReceiptBooks"
 msgstr "Talonario de recibos"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_account_journal_report_partner_id
+#: model:ir.model,name:report_extended_account.model_ir_actions_report
+msgid "Report Action"
+msgstr ""
+
+#. module: report_extended_account
+#: model:ir.model.fields,field_description:report_extended_account.field_account_journal__report_partner_id
 msgid "Report Partner"
 msgstr "Contacto para encabezado de reporte"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_ir_act_report_xml_account_invoice_split_invoice
+#: model:ir.model.fields,field_description:report_extended_account.field_ir_actions_report__account_invoice_split_invoice
 msgid "Split Inovice"
 msgstr "Dividir factura"
 
 #. module: report_extended_account
-#: model:ir.model.fields,field_description:report_extended_account.field_account_invoice_splitter_invoice_id
+#: model:ir.model.fields,field_description:report_extended_account.field_account_invoice__splitter_invoice_id
 msgid "Splitter Invoice"
 msgstr "Divisor de Factura"
 
 #. module: report_extended_account
-#: model:ir.model.fields,help:report_extended_account.field_account_invoice_splitted_invoice_id
+#: model:ir.model.fields,help:report_extended_account.field_account_invoice__splitted_invoice_id
 msgid "This field contain the invoice generated by splitting the current one."
 msgstr "Este campo contiene la factura generada dividiendo la actual."
 
 #. module: report_extended_account
-#: model:ir.model.fields,help:report_extended_account.field_account_invoice_splitter_invoice_id
+#: model:ir.model.fields,help:report_extended_account.field_account_invoice__splitter_invoice_id
 msgid ""
 "This field contain the invoice that was splitted, generating another "
 "invoice."
 msgstr ""
 "Este campo contiene la factura que fue dividida, generando otra factura."
-
-#. module: report_extended_account
-#: model:ir.model,name:report_extended_account.model_ir_actions_report
-msgid "ir.actions.report"
-msgstr "ir.actions.report"
