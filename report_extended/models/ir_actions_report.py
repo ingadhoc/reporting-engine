@@ -75,7 +75,7 @@ class IrActionsReport(models.Model):
         else:
             title = _('No report defined')
             message = _('There is no report defined for this conditions.')
-            raise UserError(_(title, message))
+            raise UserError(title + '. ' + message)
         return report
 
     @api.model
