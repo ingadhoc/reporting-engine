@@ -55,7 +55,7 @@ class IrActionsReport(models.Model):
                 records, 'company_id') and records[0].company_id:
             company = records.company_id
         else:
-            company = self.env.user.company_id
+            company = self.env.company_id
         for domain in domains:
             domain.append(('model', '=', records[0]._name))
 
@@ -82,7 +82,6 @@ class IrActionsReport(models.Model):
     def get_domains(self, record):
         return []
 
-    @api.multi
     def update_lines_that_apply(self):
         config_defaults = self.env['report.configuration.default'].search([])
         for report in self:
@@ -119,9 +118,8 @@ class IrActionsReport(models.Model):
             rec.update_lines_that_apply()
         return rec
 
-    @api.multi
     def _extend_report_context(self, docids, data=None):
-        company = self.env.user.company_id
+        company = self.env.company_id
         # if we have company on the active object we prefer it (odoo does
         # similar on web external_layout)
         recs = self.env.get(self.model).browse(docids)
