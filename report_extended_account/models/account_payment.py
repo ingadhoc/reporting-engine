@@ -4,7 +4,6 @@ from odoo import models, api, _
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
-    @api.multi
     def payment_print(self):
         self.ensure_one()
         # if we print caming from other model then active id and active model
@@ -14,7 +13,6 @@ class AccountPayment(models.Model):
         return self.env['ir.actions.report'].get_report(self).report_action(
             self)
 
-    @api.multi
     def action_payment_sent(self):
         """ Open a window to compose an email, with the edi payment template
             message loaded by default

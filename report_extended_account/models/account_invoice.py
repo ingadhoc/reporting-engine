@@ -26,13 +26,11 @@ class AccountInvoice(models.Model):
         'Internal Notes'
     )
 
-    @api.multi
     def get_report(self):
         """Para ser usado tmb, por ejemplo, desde qweb en website_portal
         """
         return self.env['ir.actions.report'].get_report(self)
 
-    @api.multi
     def invoice_print(self):
         """ Print the invoice and mark it as sent, so that we can see more
             easily the next step of the workflow
@@ -47,7 +45,6 @@ class AccountInvoice(models.Model):
         return self.env['ir.actions.report'].search(
             [('report_name', '=', report_name)], limit=1).report_action(self)
 
-    # @api.multi
     # def split_invoice(self, lines_to_split):
     #     '''
     #     Split the invoice when the lines exceed the maximum lines_to_split
@@ -102,7 +99,6 @@ class AccountInvoice(models.Model):
     #     return res
 
     # This is the first action on the invoice
-    # @api.multi
     # def action_date_assign(self):
     #     report_obj = self.env['ir.actions.report']
     #     report = report_obj.with_context(ignore_state=True).get_report(
