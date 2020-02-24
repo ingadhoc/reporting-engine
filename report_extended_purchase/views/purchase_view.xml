@@ -24,16 +24,5 @@
             </field>
         </record>
 
-        <record id="invoice_supplier_form" model="ir.ui.view">
-            <field name="name">purchase.invoice.form</field>
-            <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_supplier_form"/>
-            <field name="arch" type="xml">
-                <field name="comment" position="before">
-                    <field name="internal_notes" placeholder="Internal notes.."/>
-                </field>
-            </field>
-        </record>
-
     </data>
 </odoo>

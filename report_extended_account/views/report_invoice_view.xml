@@ -6,11 +6,8 @@
         <field name="inherit_id" ref="base.act_report_xml_view"/>
         <field name="arch" type="xml">
             <notebook>
-                <page string="Invoice Information" attrs="{'invisible':[('model','!=', 'account.invoice')]}">
+                <page string="Invoice Information" attrs="{'invisible':[('model','!=', 'account.move')]}">
                     <group>
-                        <field name="account_invoice_state"/>
-                        <field name="account_invoice_lines_to_split"/>
-                        <field name="account_invoice_split_invoice"/>
                         <field name="account_invoice_journal_ids"/>
                         <field name="document_type_ids"/>
                     </group>

@@ -4,4 +4,4 @@
 ##############################################################################
 from . import purchase
 from . import report
-from . import account_invoice
+from . import account_move

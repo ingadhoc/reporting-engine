@@ -30,15 +30,13 @@
     ],
     'depends': [
         'report_extended',
-        # for receiptbooks
-        'account_document',
-        # 'account',
+        'l10n_latam_invoice_document',
     ],
     'data': [
         'views/report_invoice_view.xml',
         'views/report_payment_view.xml',
         'views/account_payment_view.xml',
-        'views/account_invoice_view.xml',
+        'views/account_move_view.xml',
         'views/account_journal_views.xml',
     ],
     'demo': [

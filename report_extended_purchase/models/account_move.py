@@ -2,8 +2,8 @@
 from odoo import api, models
 
 
-class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+class AccountMove(models.Model):
+    _inherit = 'account.move'
 
     @api.onchange('purchase_id')
     def purchase_order_change(self):
@@ -21,4 +21,4 @@ class AccountInvoice(models.Model):
             comment = '%s\n%s' % (self.internal_notes, internal_notes)
         self.comment = comment
         self.internal_notes = internal_notes
-        return super(AccountInvoice, self).purchase_order_change()
+        return super().purchase_order_change()

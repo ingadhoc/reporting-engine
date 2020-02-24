@@ -55,7 +55,7 @@ class IrActionsReport(models.Model):
                 records, 'company_id') and records[0].company_id:
             company = records.company_id
         else:
-            company = self.env.company_id
+            company = self.env.company
         for domain in domains:
             domain.append(('model', '=', records[0]._name))
 
@@ -119,7 +119,7 @@ class IrActionsReport(models.Model):
         return rec
 
     def _extend_report_context(self, docids, data=None):
-        company = self.env.company_id
+        company = self.env.company
         # if we have company on the active object we prefer it (odoo does
         # similar on web external_layout)
         recs = self.env.get(self.model).browse(docids)
