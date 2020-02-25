@@ -41,7 +41,6 @@ class IrActionsReport(models.Model):
                 ('receiptbook_ids', '=', False)])
         return domains
 
-    @api.multi
     def _extend_report_context(self, docids, data=None):
         self = super(
             IrActionsReport, self)._extend_report_context(

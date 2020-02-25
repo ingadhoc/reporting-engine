@@ -4,7 +4,6 @@ from odoo import models, api, _
 class AccountPaymentGroup(models.Model):
     _inherit = 'account.payment.group'
 
-    @api.multi
     def payment_print(self):
         self.ensure_one()
         self.sent = True
@@ -17,7 +16,6 @@ class AccountPaymentGroup(models.Model):
         return self.env['ir.actions.report'].get_report(self).report_action(
             self)
 
-    @api.multi
     def action_payment_sent(self):
         """ Open a window to compose an email, with the edi payment template
             message loaded by default
