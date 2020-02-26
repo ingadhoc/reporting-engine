@@ -31,6 +31,7 @@
     'depends': [
         'report_extended',
         'l10n_latam_invoice_document',
+        'account_payment_group_document',
     ],
     'data': [
         'views/report_invoice_view.xml',

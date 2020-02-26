@@ -1,4 +1,4 @@
-from odoo import models, api, _
+from odoo import models, _
 
 
 class AccountPayment(models.Model):
