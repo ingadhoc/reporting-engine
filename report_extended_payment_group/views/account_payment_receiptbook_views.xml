@@ -4,7 +4,7 @@
     <record id="view_receipt_receiptbook_search" model="ir.ui.view">
         <field name="name">account.payment.receiptbook.search</field>
         <field name="model">account.payment.receiptbook</field>
-        <field name="inherit_id" ref="account_document.view_receipt_receiptbook_search"/>
+        <field name="inherit_id" ref="account_payment_group_document.view_receipt_receiptbook_search"/>
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <field name="report_partner_id"/>
@@ -15,7 +15,7 @@
     <record id="view_receipt_receiptbook_tree" model="ir.ui.view">
         <field name="name">account.payment.receiptbook.tree</field>
         <field name="model">account.payment.receiptbook</field>
-        <field name="inherit_id" ref="account_document.view_receipt_receiptbook_tree"/>
+        <field name="inherit_id" ref="account_payment_group_document.view_receipt_receiptbook_tree"/>
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <field name="report_partner_id"/>
@@ -26,7 +26,7 @@
     <record id="view_receipt_receiptbook_form" model="ir.ui.view">
         <field name="name">account.payment.receiptbook.form</field>
         <field name="model">account.payment.receiptbook</field>
-        <field name="inherit_id" ref="account_document.view_receipt_receiptbook_form"/>
+        <field name="inherit_id" ref="account_payment_group_document.view_receipt_receiptbook_form"/>
         <field name="arch" type="xml">
             <field name="partner_type" position="after">
                 <field name="report_partner_id"/>
