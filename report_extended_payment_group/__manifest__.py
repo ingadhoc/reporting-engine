@@ -29,7 +29,7 @@
     'images': [
     ],
     'depends': [
-        'report_extended_account',
+        'report_extended',
         # for receiptbooks
         'account_payment_group_document',
     ],
