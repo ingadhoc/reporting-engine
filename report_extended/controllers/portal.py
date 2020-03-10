@@ -16,7 +16,8 @@ class PortalReportExtended(CustomerPortal):
         # por ahora, comoo no podemos previsualizar reportes de aeroo, si se pide reporte html/text devolvemos reportes
         # nativos de odoo. Una vez implementado lo de abajo se puede usar siempre el get_report
         # report_sudo = model.sudo().get_report()
-        report_sudo = report_type == 'pdf' and hasattr(model.sudo(), 'get_report') and model.sudo().get_report() or False
+        report_sudo = report_type == 'pdf' and hasattr(
+            model.sudo(), 'get_report') and model.sudo().get_report() or False
 
         # if we found a new report use it, if not use default report_ref
         report_ref = report_sudo and report_sudo.get_external_id()[report_sudo.id] or report_ref
