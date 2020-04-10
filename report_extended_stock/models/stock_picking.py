@@ -8,7 +8,6 @@ from odoo import models, api
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    @api.multi
     def do_print_picking(self):
         '''This function prints the picking list'''
         self.ensure_one()
@@ -23,7 +22,6 @@ class StockPicking(models.Model):
         return self.env['ir.actions.report'].get_report(self).report_action(
             self)
 
-    @api.multi
     def do_print_voucher(self):
         '''This function prints the voucher (deliveryslip)'''
         self.ensure_one()
@@ -43,9 +41,9 @@ class StockPicking(models.Model):
         """
         for rec in self.filtered('sale_id'):
             vals = {}
-            propagate_internal_notes = self.env['ir.config_parameter'].sudo(
+            propagate_internal_notes = self.env['ir.config_parameter'].with_user(
             ).get_param('sale.propagate_internal_notes') == 'True'
-            propagate_note = self.env['ir.config_parameter'].sudo(
+            propagate_note = self.env['ir.config_parameter'].with_user(
             ).get_param('sale.propagate_note') == 'True'
             if propagate_internal_notes and rec.sale_id.internal_notes:
                 vals['note'] = rec.sale_id.internal_notes

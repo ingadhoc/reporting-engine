@@ -57,7 +57,6 @@ class IrActionsReport(models.Model):
             domains.append([('stock_report_type', '=', False)])
         return domains
 
-    @api.multi
     def _extend_report_context(self, docids, data=None):
         self = super(
             IrActionsReport, self)._extend_report_context(
