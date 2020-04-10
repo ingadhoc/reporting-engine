@@ -25,7 +25,6 @@ class IrActionsReport(models.Model):
             domains.append([('sale_order_state', '=', False)])
         return domains
 
-    @api.multi
     def _extend_report_context(self, docids, data=None):
         self = super(
             IrActionsReport, self)._extend_report_context(

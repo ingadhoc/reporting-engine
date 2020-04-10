@@ -10,14 +10,12 @@ class SaleOrder(models.Model):
 
     internal_notes = fields.Text('Internal Notes')
 
-    @api.multi
     def get_report(self):
         """
         Para ser usado tmb, por ejemplo, desde qweb en website_portal
         """
         return self.env['ir.actions.report'].get_report(self)
 
-    @api.multi
     def print_quotation(self):
         self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
 
@@ -28,12 +26,11 @@ class SaleOrder(models.Model):
 
         return self.get_report().report_action(self)
 
-    @api.multi
     def _prepare_invoice(self):
         vals = super(SaleOrder, self)._prepare_invoice()
-        propagate_internal_notes = self.env['ir.config_parameter'].sudo(
+        propagate_internal_notes = self.env['ir.config_parameter'].with_user(
         ).get_param('sale.propagate_internal_notes') == 'True'
-        propagate_note = self.env['ir.config_parameter'].sudo(
+        propagate_note = self.env['ir.config_parameter'].with_user(
         ).get_param('sale.propagate_note') == 'True'
         if propagate_internal_notes and self.internal_notes:
             vals.update({
