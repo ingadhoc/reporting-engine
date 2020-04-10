@@ -2,7 +2,7 @@
 # For copyright and license notices, see __manifest__.py file in module root
 # directory
 ##############################################################################
-from odoo import models, fields, api
+from odoo import models, fields
 
 
 class IrActionsReport(models.Model):
@@ -25,7 +25,6 @@ class IrActionsReport(models.Model):
             domains.append([('sale_order_state', '=', False)])
         return domains
 
-    @api.multi
     def _extend_report_context(self, docids, data=None):
         self = super(
             IrActionsReport, self)._extend_report_context(

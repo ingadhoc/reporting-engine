@@ -10,7 +10,6 @@ class PurchaseOrder(models.Model):
 
     internal_notes = fields.Text('Internal Notes')
 
-    @api.multi
     def print_quotation(self):
         # if PO was on draft, set it on sent
         self.filtered(lambda x: x.state == 'draft').write({'state': "sent"})
