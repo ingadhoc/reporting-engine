@@ -28,9 +28,9 @@ class SaleOrder(models.Model):
 
     def _prepare_invoice(self):
         vals = super(SaleOrder, self)._prepare_invoice()
-        propagate_internal_notes = self.env['ir.config_parameter'].with_user(
+        propagate_internal_notes = self.env['ir.config_parameter'].sudo(
         ).get_param('sale.propagate_internal_notes') == 'True'
-        propagate_note = self.env['ir.config_parameter'].with_user(
+        propagate_note = self.env['ir.config_parameter'].sudo(
         ).get_param('sale.propagate_note') == 'True'
         if propagate_internal_notes and self.internal_notes:
             vals.update({

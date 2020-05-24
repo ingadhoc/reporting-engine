@@ -41,9 +41,9 @@ class StockPicking(models.Model):
         """
         for rec in self.filtered('sale_id'):
             vals = {}
-            propagate_internal_notes = self.env['ir.config_parameter'].with_user(
+            propagate_internal_notes = self.env['ir.config_parameter'].sudo(
             ).get_param('sale.propagate_internal_notes') == 'True'
-            propagate_note = self.env['ir.config_parameter'].with_user(
+            propagate_note = self.env['ir.config_parameter'].sudo(
             ).get_param('sale.propagate_note') == 'True'
             if propagate_internal_notes and rec.sale_id.internal_notes:
                 vals['note'] = rec.sale_id.internal_notes
