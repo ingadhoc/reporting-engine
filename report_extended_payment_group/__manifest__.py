@@ -35,8 +35,6 @@
     ],
     'data': [
         'views/report_payment_group_view.xml',
-        'views/account_payment_receiptbook_views.xml',
-        'data/mail_template_data.xml',
     ],
     'demo': [
     ],
