@@ -9,10 +9,6 @@ from odoo.exceptions import UserError
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    internal_notes = fields.Text(
-        'Internal Notes'
-    )
-
     def get_report(self):
         """Para ser usado tmb, por ejemplo, desde qweb en website_portal
         """

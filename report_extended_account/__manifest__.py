@@ -37,7 +37,6 @@
         'views/report_invoice_view.xml',
         'views/report_payment_view.xml',
         'views/account_payment_view.xml',
-        'views/account_move_view.xml',
         'views/account_journal_views.xml',
     ],
     'demo': [
