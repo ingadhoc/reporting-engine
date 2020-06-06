@@ -31,16 +31,11 @@
     'depends': [
         'report_extended',
         # 'sale',
-        # TODO dejamos esta dependencia hasta que movamos cierta funcionalidad
-        # a un sale_document
+        # todavia seguimos mandando por aca el partner en _extend_report_context
         'l10n_ar_sale',
     ],
     'data': [
-        'data/ir_config_parameter_data.xml',
         'views/report_view.xml',
-        'views/sale_order_view.xml',
-        'views/sale_checkbook_views.xml',
-        'wizards/res_config_settings_views.xml',
     ],
     'demo': [
     ],
