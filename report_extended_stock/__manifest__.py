@@ -36,7 +36,6 @@
     'data': [
         'views/report_view.xml',
         'views/stock_view.xml',
-        'views/stock_book_views.xml',
     ],
     'demo': [
     ],
