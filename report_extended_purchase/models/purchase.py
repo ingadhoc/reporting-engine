@@ -8,8 +8,6 @@ from odoo import models, fields, api
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-    internal_notes = fields.Text('Internal Notes')
-
     def print_quotation(self):
         # if PO was on draft, set it on sent
         self.filtered(lambda x: x.state == 'draft').write({'state': "sent"})
@@ -21,9 +19,3 @@ class PurchaseOrder(models.Model):
 
         return self.env['ir.actions.report'].get_report(self).report_action(
             self)
-
-    @api.model
-    def _prepare_picking(self):
-        res = super(PurchaseOrder, self)._prepare_picking()
-        res['note'] = self.internal_notes
-        return res

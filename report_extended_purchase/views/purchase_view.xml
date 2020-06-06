@@ -10,17 +10,6 @@
                 <button name="print_quotation" position="after">
                     <button name="print_quotation" string="Print Order" class="oe_highlight" type="object" states="approved" groups="base.group_user"/>
                 </button>
-                <field name="notes" position="before">
-                    <div class="oe_clear">
-                        <label for="notes"/>
-                    </div>
-                </field>
-                <div class="oe_clear" position="before">
-                    <div class="oe_clear">
-                        <label for="internal_notes"/>
-                    </div>
-                    <field name="internal_notes" class="oe_inline" placeholder="Internal Notes..."/>
-                </div>
             </field>
         </record>
 
