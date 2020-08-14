@@ -25,6 +25,7 @@ class PrintingPrinter(models.Model):
         required=True,
         default='cups',
     )
+    server_id = fields.Many2one(required=False)
     # we add some help
     uri = fields.Char(help='URI in Google Print is the printer id')
 
@@ -39,8 +40,6 @@ class PrintingPrinter(models.Model):
 
     @api.model
     def update_gc_printers(self, user=None):
-        gc_server = self.env.ref(
-            'google_cloud_print.printing_server_cloudprint')
         _logger.info('Updating Google Cloud Printers')
         gcprinters = self.env['google.cloudprint.config'].get_printers(user)
         for gcprinter in gcprinters:
@@ -62,7 +61,6 @@ class PrintingPrinter(models.Model):
                         gcprinter.get('connectionStatus', False)),
                     'gc_user_id': user and user.id or False,
                     'status_message': gcprinter.get('connectionStatus', False),
-                    'server_id': gc_server.id,
                 })
         return True
 
@@ -159,10 +157,8 @@ class PrintingPrinter(models.Model):
 
     @api.multi
     def enable(self):
-        gc_server = self.env.ref(
-            'google_cloud_print.printing_server_cloudprint')
         for printer in self:
-            if printer.server_id == gc_server:
+            if printer.printer_type == 'gcp':
                 printer.update_printers_status()
             else:
                 super(PrintingPrinter, self).enable()
