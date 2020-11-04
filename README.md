@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/ingadhoc/reporting-engine/badge.png?branch=13.0)](https://coveralls.io/r/ingadhoc/reporting-engine?branch=13.0)
 [![Code Climate](https://codeclimate.com/github/ingadhoc/reporting-engine/badges/gpa.svg)](https://codeclimate.com/github/ingadhoc/reporting-engine)
 
-# ADHOC reporting-engine
+# ADHOC reporting-engine (DEPRECATED)
 
 ADHOC Odoo reporting-engine Modules
 
